@@ -39,9 +39,3 @@
         padding-bottom: 0;
     }
 }
-
-@media only all and (max-width:425px) {
-    .container {
-        padding-inline: 1rem;
-    }
-}

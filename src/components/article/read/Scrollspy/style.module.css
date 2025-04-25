@@ -34,8 +34,14 @@
 }
 
 /* MEDIA QUERIES */
-@media only all and (max-width:1800px)  {
+@media only all and (max-width:1800px) {
     .container {
         padding-bottom: 0;
+    }
+}
+
+@media only all and (max-width:425px) {
+    .container {
+        padding-inline: 1rem;
     }
 }

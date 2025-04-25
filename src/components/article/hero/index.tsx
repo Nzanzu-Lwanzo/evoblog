@@ -1,7 +1,7 @@
 import style from './style.module.css'
 import Avatar from '../../__global__/avatar'
 
-const LandingHero = () => {
+const ArticleHero = () => {
   return (
     <section className={style.section} >
       <div className={style.content__card}>
@@ -21,4 +21,4 @@ const LandingHero = () => {
   )
 }
 
-export default LandingHero
+export default ArticleHero

@@ -1,0 +1,18 @@
+.footer {
+    width: 100%;
+    padding: 1rem;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1rem;
+    font-size: .8rem;
+    border-top: 1px solid var(--contrast);
+    color: #555;
+}
+
+.link__text {
+    color: red;
+    text-decoration: underline;
+    font-weight: bold;
+}

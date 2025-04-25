@@ -1,0 +1,31 @@
+.article__card {
+    width: 100%;
+    background-color: var(--contrast);
+    color: #FFF;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.link__to__read {
+    font-size: .8rem;
+    font-weight: 300;
+    line-height: .8rem;
+    color: inherit;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.meta__infos {
+    margin-top: .5rem;
+    font-size: .7rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}

@@ -1,0 +1,41 @@
+.container {
+    top: 0;
+    left: 20px;
+    position: sticky;
+    padding: 2rem;
+    z-index: 1;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.link {
+    font-size: .9rem;
+    display: block;
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: #555;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.link:hover {
+    color: #222;
+    background: #f0f0f0;
+}
+
+.active {
+    background-color: #e0ecff;
+    color: #1a73e8;
+    font-weight: bold;
+}
+
+/* MEDIA QUERIES */
+@media only all and (max-width:1800px)  {
+    .container {
+        padding-bottom: 0;
+    }
+}

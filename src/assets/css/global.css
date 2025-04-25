@@ -1,0 +1,107 @@
+:root {
+    --header: 70px;
+    --contrast: #191919;
+    --accent: #1A73E8;
+}
+
+
+.inter,
+* {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    border: none;
+    outline: none;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body,
+.App,
+#root {
+    min-height: 100dvh;
+    width: 100dvw;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+img:not(.no__full) {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+article {
+    padding-block: 2rem;
+
+
+    &>* {
+        display: block;
+        padding-inline: 2rem;
+    }
+
+    img {
+        margin-block: 1rem;
+    }
+
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: bold;
+        margin-block: .5rem;
+    }
+
+    p,
+    li {
+        font-size: .9rem;
+        line-height: 1.4rem;
+        font-weight: 350;
+    }
+
+    ul,
+    ol {
+        padding-left: 40px;
+    }
+
+    a {
+        text-decoration: underline;
+
+        &:hover {
+            color: var(--accent);
+        }
+    }
+
+    .standout {
+        margin-block: .5rem;
+        background-color: rgb(26, 115, 232, .4);
+        border-left: 3px solid var(--accent);
+        padding-block: 1rem;
+    }
+
+    .warning {
+        margin-block: .5rem;
+        background-color: rgb(253, 230, 138, .4);
+        padding-block: 1rem;
+        border-left: 3px solid #FBBF24;
+    }
+
+    .redd {
+        margin-block: .5rem;
+        background-color: #FEE2E2;
+        padding-block: 1rem;
+        border-left: 3px solid red;
+    }
+}

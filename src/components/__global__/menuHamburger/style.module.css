@@ -1,0 +1,66 @@
+.mobile__menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    font-size: .9rem;
+}
+
+.mobile__menu {
+    display: none;
+}
+
+.mobile__menu .btn {
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.menu__btn {
+    height: 30px;
+    width: 30px;
+    margin-left: auto;
+    position: relative;
+}
+
+.menu__btn .bar {
+    height: 3px;
+    width: 100%;
+    background-color: var(--contrast);
+    border-radius: 5px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: .3s ease;
+    /* This must be the transition of the navbar on mobile as well */
+}
+
+.menu__btn .bar__1 {
+    top: 25%;
+}
+
+.menu__btn .bar__3 {
+    top: 75%;
+}
+
+.menu__btn.active .bar__1 {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.menu__btn.active .bar__2 {
+    opacity: 0;
+}
+
+.menu__btn.active .bar__3 {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+
+@media only all and (max-width:500px) {
+    
+    .mobile__menu {
+        display: flex;
+    }
+}

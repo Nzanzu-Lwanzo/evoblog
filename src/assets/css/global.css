@@ -105,3 +105,11 @@ article {
         border-left: 3px solid red;
     }
 }
+
+
+/* MEDIA QUERIES */
+@media only all and (max-width:425px) {
+    article > * {
+        padding-inline: 1rem;
+    }
+}

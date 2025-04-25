@@ -99,3 +99,9 @@
         bottom: 2rem;
     }
 }
+
+@media only all and (max-width:425px) {
+    .list__articles {
+        padding-inline: 1rem;
+    }
+}

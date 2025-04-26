@@ -25,16 +25,19 @@ const SampleContent = () => {
             </p>
 
             <SampleElement
-                videoId='isViE_8vDQk'
-                title='Too Deep For the intro'
-                singers={['J Cole']}
-                releaseYear={2024}
-            />
-            <SampleElement
                 videoId='Np21rH7Ldto'
                 title="Didn't cha know"
                 singers={['Erykah Badu']}
                 releaseYear={2010}
+                sample={false}
+            />
+
+            <SampleElement
+                videoId='isViE_8vDQk'
+                title='Too Deep For the intro'
+                singers={['J Cole']}
+                releaseYear={2024}
+                sample
             />
         </article>
     )

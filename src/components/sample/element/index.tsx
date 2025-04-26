@@ -4,15 +4,16 @@ interface SampleElementPropTyps {
   videoId: string;
   title: string;
   singers: string[];
-  releaseYear: number
+  releaseYear: number;
+  sample: boolean;
 }
 
-const SampleElement = ({ releaseYear, videoId, title, singers }: SampleElementPropTyps) => {
+const SampleElement = ({ sample, releaseYear, videoId, title, singers }: SampleElementPropTyps) => {
   return (
     <div className={style.sample__element}>
       <div className={style.details__content}>
         <h2 className={style.title}>{singers.length > 1 ? `${singers[0]} & alii.` : singers[0]} : {title}</h2>
-        <span className={style.meta__info}>Original : {releaseYear}</span>
+        <span className={style.meta__info}>{sample ? "Sample" : "Original"}  : {releaseYear}</span>
       </div>
       <iframe
         src={`https://www.youtube.com/embed/${videoId}`}

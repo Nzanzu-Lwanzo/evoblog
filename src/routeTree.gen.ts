@@ -14,7 +14,9 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as AuthSignupImport } from './routes/auth/signup'
 import { Route as AuthLoginImport } from './routes/auth/login'
+import { Route as PostForumIndexImport } from './routes/post/forum/index'
 import { Route as PostReadidIndexImport } from './routes/post/read/[id]/index'
+import { Route as PostForumslugIndexImport } from './routes/post/forum/[slug]/index'
 
 // Create/Update Routes
 
@@ -36,9 +38,21 @@ const AuthLoginRoute = AuthLoginImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const PostForumIndexRoute = PostForumIndexImport.update({
+  id: '/post/forum/',
+  path: '/post/forum/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const PostReadidIndexRoute = PostReadidIndexImport.update({
   id: '/post/read/[id]/',
   path: '/post/read/[id]/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PostForumslugIndexRoute = PostForumslugIndexImport.update({
+  id: '/post/forum/[slug]/',
+  path: '/post/forum/[slug]/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -67,6 +81,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthSignupImport
       parentRoute: typeof rootRoute
     }
+    '/post/forum/': {
+      id: '/post/forum/'
+      path: '/post/forum'
+      fullPath: '/post/forum'
+      preLoaderRoute: typeof PostForumIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/post/forum/[slug]/': {
+      id: '/post/forum/[slug]/'
+      path: '/post/forum/[slug]'
+      fullPath: '/post/forum/[slug]'
+      preLoaderRoute: typeof PostForumslugIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/post/read/[id]/': {
       id: '/post/read/[id]/'
       path: '/post/read/[id]'
@@ -83,6 +111,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
+  '/post/forum': typeof PostForumIndexRoute
+  '/post/forum/[slug]': typeof PostForumslugIndexRoute
   '/post/read/[id]': typeof PostReadidIndexRoute
 }
 
@@ -90,6 +120,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
+  '/post/forum': typeof PostForumIndexRoute
+  '/post/forum/[slug]': typeof PostForumslugIndexRoute
   '/post/read/[id]': typeof PostReadidIndexRoute
 }
 
@@ -98,15 +130,36 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
+  '/post/forum/': typeof PostForumIndexRoute
+  '/post/forum/[slug]/': typeof PostForumslugIndexRoute
   '/post/read/[id]/': typeof PostReadidIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth/login' | '/auth/signup' | '/post/read/[id]'
+  fullPaths:
+    | '/'
+    | '/auth/login'
+    | '/auth/signup'
+    | '/post/forum'
+    | '/post/forum/[slug]'
+    | '/post/read/[id]'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth/login' | '/auth/signup' | '/post/read/[id]'
-  id: '__root__' | '/' | '/auth/login' | '/auth/signup' | '/post/read/[id]/'
+  to:
+    | '/'
+    | '/auth/login'
+    | '/auth/signup'
+    | '/post/forum'
+    | '/post/forum/[slug]'
+    | '/post/read/[id]'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth/login'
+    | '/auth/signup'
+    | '/post/forum/'
+    | '/post/forum/[slug]/'
+    | '/post/read/[id]/'
   fileRoutesById: FileRoutesById
 }
 
@@ -114,6 +167,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthSignupRoute: typeof AuthSignupRoute
+  PostForumIndexRoute: typeof PostForumIndexRoute
+  PostForumslugIndexRoute: typeof PostForumslugIndexRoute
   PostReadidIndexRoute: typeof PostReadidIndexRoute
 }
 
@@ -121,6 +176,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthSignupRoute: AuthSignupRoute,
+  PostForumIndexRoute: PostForumIndexRoute,
+  PostForumslugIndexRoute: PostForumslugIndexRoute,
   PostReadidIndexRoute: PostReadidIndexRoute,
 }
 
@@ -137,6 +194,8 @@ export const routeTree = rootRoute
         "/",
         "/auth/login",
         "/auth/signup",
+        "/post/forum/",
+        "/post/forum/[slug]/",
         "/post/read/[id]/"
       ]
     },
@@ -148,6 +207,12 @@ export const routeTree = rootRoute
     },
     "/auth/signup": {
       "filePath": "auth/signup.tsx"
+    },
+    "/post/forum/": {
+      "filePath": "post/forum/index.tsx"
+    },
+    "/post/forum/[slug]/": {
+      "filePath": "post/forum/[slug]/index.tsx"
     },
     "/post/read/[id]/": {
       "filePath": "post/read/[id]/index.tsx"

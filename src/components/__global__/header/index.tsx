@@ -3,8 +3,12 @@ import MenuHamburger from '../menuHamburger'
 import { useCallback, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import Avatar from '../avatar'
+import { Search } from 'lucide-react'
+import { useAppContext } from '../../../contexts/AppContext'
 
 const Header = () => {
+
+  const ctx = useAppContext()
 
   const [showMobileMenu, setShowMobileMenu] = useState(false)
 
@@ -13,6 +17,8 @@ const Header = () => {
   }
 
   const onNavigation = useCallback(() => setShowMobileMenu(false), [])
+
+  const showFilterAndSearchPanel = useCallback(() => ctx?.setShowFilterAndSearchPanel(true), [ctx?.showFilterAndSearchPanel])
 
   return (
     <header className={style.header}>
@@ -23,10 +29,15 @@ const Header = () => {
       <nav className={`${style.navbar} ${showMobileMenu && style.active}`}>
         <Link to="/" className={style.navlink} onClick={onNavigation}>Acceuil</Link>
         <Link to="/post/read/[id]" params={{ id: "bfou-dasdfwd-sda" }} className={style.navlink} onClick={onNavigation}>Blog</Link>
-        <Link to="/" className={style.navlink} onClick={onNavigation}>Newsletter</Link>
-        <Link to="/" className={style.navlink} onClick={onNavigation}>Contacts</Link>
+        <Link to="/" className={style.navlink} onClick={onNavigation}>Forum</Link>
+        <Link to="/auth/signup" className={style.navlink} onClick={onNavigation}>Compte</Link>
       </nav>
-      <MenuHamburger showMenu={showMobileMenu} toggleMenuAppearance={toggleMenuAppearance} />
+      <div className={style.actions}>
+        <button type="button" className={`center ${style.search__and__filter}`} onClick={showFilterAndSearchPanel}>
+          <Search size={25} stroke='currentColor' />
+        </button>
+        <MenuHamburger showMenu={showMobileMenu} toggleMenuAppearance={toggleMenuAppearance} />
+      </div>
     </header>
   )
 }

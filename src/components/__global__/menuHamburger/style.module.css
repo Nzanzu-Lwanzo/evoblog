@@ -58,8 +58,8 @@
 }
 
 
-@media only all and (max-width:500px) {
-    
+@media only all and (max-width:768px) {
+
     .mobile__menu {
         display: flex;
     }

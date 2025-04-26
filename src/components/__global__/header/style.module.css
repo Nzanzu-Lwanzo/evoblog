@@ -33,6 +33,26 @@
     }
 }
 
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.search__and__filter {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    transition: .2s ease-out;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #EEE;
+    }
+}
+
 
 /* MEDIA QUERIES */
 @media only all and (max-width:1080px) {
@@ -41,7 +61,7 @@
     }
 }
 
-@media only all and (max-width:500px) {
+@media only all and (max-width:768px) {
 
     .header {
         position: sticky;

@@ -28,8 +28,8 @@ const Header = () => {
       </div>
       <nav className={`${style.navbar} ${showMobileMenu && style.active}`}>
         <Link to="/" className={style.navlink} onClick={onNavigation}>Acceuil</Link>
-        <Link to="/post/read/[id]" params={{ id: '1' }} className={style.navlink} onClick={onNavigation}>Blog</Link>
-        <Link to="/post/forum/[slug]" params={{ slug: 'post-slug' }} className={style.navlink} onClick={onNavigation}>Forum</Link>
+        <Link to="/post/read/[id]" params={{ id: 'id' }} className={style.navlink} onClick={onNavigation}>Blog</Link>
+        <Link to="/sample/[slug]" params={{ slug: 'post-slug' }} className={style.navlink} onClick={onNavigation}>Samples</Link>
         <Link to="/auth/signup" className={style.navlink} onClick={onNavigation}>Compte</Link>
       </nav>
       <div className={style.actions}>

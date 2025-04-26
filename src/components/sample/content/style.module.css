@@ -1,0 +1,19 @@
+.section {
+    min-height: 50dvh;
+    width: 800px;
+    margin: auto;
+    padding: 2rem 1rem;
+}
+
+
+.big__title {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+/* MEDIA QUERIES */
+@media only all and (max-width:820px) {
+    .section {
+        width: 100%;
+    }
+}

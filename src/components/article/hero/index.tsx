@@ -3,7 +3,7 @@ import Avatar from '../../__global__/avatar'
 
 const ArticleHero = () => {
   return (
-    <section className={style.section} >
+    <section className={`square__bg ${style.section}`} >
       <div className={style.content__card}>
         <h1 className={style.title}>Sécuriser les communications RTC avec Django, quelles techniques pour quels enjeux ?</h1>
         <div className={style.meta__infos}>

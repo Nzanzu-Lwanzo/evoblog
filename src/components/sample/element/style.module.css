@@ -1,0 +1,34 @@
+.sample__element {
+    width: 100%;
+    height: 100%;
+    background-color: #FFF;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.youtube__frame {
+    width: 100%;
+    height: 300px;
+}
+
+.details__content {
+    padding-block: 1rem;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: .6rem;
+    color: var(--accent);
+}
+
+.meta__info {
+    font-size: .9rem;
+    color: #555;
+}
+
+@media only all and (max-width:500px) {
+    .youtube__frame {
+        height: 200px;
+    }
+}

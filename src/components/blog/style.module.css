@@ -1,0 +1,18 @@
+
+.blog__lister {
+    padding-block: 3rem;
+    width: 1000px;
+    margin: auto;
+    padding-inline: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2rem;
+}
+
+/* MEDIA QUERIES */
+@media only all and (max-width:1080px) {
+    .blog__lister {
+        width: 100%;
+    }
+}

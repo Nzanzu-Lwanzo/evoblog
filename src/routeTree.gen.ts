@@ -12,16 +12,23 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as BlogListImport } from './routes/blog/list'
 import { Route as AuthSignupImport } from './routes/auth/signup'
 import { Route as AuthLoginImport } from './routes/auth/login'
 import { Route as SampleslugIndexImport } from './routes/sample/[slug]/index'
-import { Route as PostReadidIndexImport } from './routes/post/read/[id]/index'
+import { Route as BlogReadidIndexImport } from './routes/blog/read/[id]/index'
 
 // Create/Update Routes
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BlogListRoute = BlogListImport.update({
+  id: '/blog/list',
+  path: '/blog/list',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -43,9 +50,9 @@ const SampleslugIndexRoute = SampleslugIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const PostReadidIndexRoute = PostReadidIndexImport.update({
-  id: '/post/read/[id]/',
-  path: '/post/read/[id]/',
+const BlogReadidIndexRoute = BlogReadidIndexImport.update({
+  id: '/blog/read/[id]/',
+  path: '/blog/read/[id]/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -74,6 +81,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthSignupImport
       parentRoute: typeof rootRoute
     }
+    '/blog/list': {
+      id: '/blog/list'
+      path: '/blog/list'
+      fullPath: '/blog/list'
+      preLoaderRoute: typeof BlogListImport
+      parentRoute: typeof rootRoute
+    }
     '/sample/[slug]/': {
       id: '/sample/[slug]/'
       path: '/sample/[slug]'
@@ -81,11 +95,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SampleslugIndexImport
       parentRoute: typeof rootRoute
     }
-    '/post/read/[id]/': {
-      id: '/post/read/[id]/'
-      path: '/post/read/[id]'
-      fullPath: '/post/read/[id]'
-      preLoaderRoute: typeof PostReadidIndexImport
+    '/blog/read/[id]/': {
+      id: '/blog/read/[id]/'
+      path: '/blog/read/[id]'
+      fullPath: '/blog/read/[id]'
+      preLoaderRoute: typeof BlogReadidIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -97,16 +111,18 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
+  '/blog/list': typeof BlogListRoute
   '/sample/[slug]': typeof SampleslugIndexRoute
-  '/post/read/[id]': typeof PostReadidIndexRoute
+  '/blog/read/[id]': typeof BlogReadidIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
+  '/blog/list': typeof BlogListRoute
   '/sample/[slug]': typeof SampleslugIndexRoute
-  '/post/read/[id]': typeof PostReadidIndexRoute
+  '/blog/read/[id]': typeof BlogReadidIndexRoute
 }
 
 export interface FileRoutesById {
@@ -114,8 +130,9 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
+  '/blog/list': typeof BlogListRoute
   '/sample/[slug]/': typeof SampleslugIndexRoute
-  '/post/read/[id]/': typeof PostReadidIndexRoute
+  '/blog/read/[id]/': typeof BlogReadidIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -124,22 +141,25 @@ export interface FileRouteTypes {
     | '/'
     | '/auth/login'
     | '/auth/signup'
+    | '/blog/list'
     | '/sample/[slug]'
-    | '/post/read/[id]'
+    | '/blog/read/[id]'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth/login'
     | '/auth/signup'
+    | '/blog/list'
     | '/sample/[slug]'
-    | '/post/read/[id]'
+    | '/blog/read/[id]'
   id:
     | '__root__'
     | '/'
     | '/auth/login'
     | '/auth/signup'
+    | '/blog/list'
     | '/sample/[slug]/'
-    | '/post/read/[id]/'
+    | '/blog/read/[id]/'
   fileRoutesById: FileRoutesById
 }
 
@@ -147,16 +167,18 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthSignupRoute: typeof AuthSignupRoute
+  BlogListRoute: typeof BlogListRoute
   SampleslugIndexRoute: typeof SampleslugIndexRoute
-  PostReadidIndexRoute: typeof PostReadidIndexRoute
+  BlogReadidIndexRoute: typeof BlogReadidIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthSignupRoute: AuthSignupRoute,
+  BlogListRoute: BlogListRoute,
   SampleslugIndexRoute: SampleslugIndexRoute,
-  PostReadidIndexRoute: PostReadidIndexRoute,
+  BlogReadidIndexRoute: BlogReadidIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -172,8 +194,9 @@ export const routeTree = rootRoute
         "/",
         "/auth/login",
         "/auth/signup",
+        "/blog/list",
         "/sample/[slug]/",
-        "/post/read/[id]/"
+        "/blog/read/[id]/"
       ]
     },
     "/": {
@@ -185,11 +208,14 @@ export const routeTree = rootRoute
     "/auth/signup": {
       "filePath": "auth/signup.tsx"
     },
+    "/blog/list": {
+      "filePath": "blog/list.tsx"
+    },
     "/sample/[slug]/": {
       "filePath": "sample/[slug]/index.tsx"
     },
-    "/post/read/[id]/": {
-      "filePath": "post/read/[id]/index.tsx"
+    "/blog/read/[id]/": {
+      "filePath": "blog/read/[id]/index.tsx"
     }
   }
 }

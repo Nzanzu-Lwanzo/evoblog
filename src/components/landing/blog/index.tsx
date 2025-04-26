@@ -1,5 +1,5 @@
 import style from './style.module.css'
-import BlogArticle from './BlogArticle'
+import BlogArticle from '../../blog/blogArticle'
 
 const LandinBlog = () => {
   return (

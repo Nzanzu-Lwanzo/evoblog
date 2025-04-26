@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import ArticleHero from '../../../../components/article/hero'
 import ReadArticle from '../../../../components/article/read'
 
-export const Route = createFileRoute('/post/read/[id]/')({
+export const Route = createFileRoute('/blog/read/[id]/')({
     component: RouteComponent,
 })
 

@@ -47,6 +47,7 @@
     transition: .2s ease-out;
     background-color: transparent;
     cursor: pointer;
+    color: inherit;
 
     &:hover {
         background-color: #EEE;

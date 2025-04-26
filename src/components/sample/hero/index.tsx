@@ -29,7 +29,7 @@ const SampleHero = () => {
         opacity: 0,
         y: 20,
         stagger: 0.05,
-        delay: 1,
+        delay: .5,
         duration: 0.6,
         ease: 'power2.out',
       });

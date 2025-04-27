@@ -61,3 +61,11 @@
         }
     }
 }
+
+
+/* MEDIA QUERIES */
+@media only all and (max-width:1100px) {
+    .lister__section {
+        width: 100%;
+    }
+}

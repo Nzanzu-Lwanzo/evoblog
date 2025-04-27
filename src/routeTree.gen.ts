@@ -15,6 +15,7 @@ import { Route as IndexImport } from './routes/index'
 import { Route as BlogListImport } from './routes/blog/list'
 import { Route as AuthSignupImport } from './routes/auth/signup'
 import { Route as AuthLoginImport } from './routes/auth/login'
+import { Route as SampleListIndexImport } from './routes/sample/list/index'
 import { Route as SampleslugIndexImport } from './routes/sample/[slug]/index'
 import { Route as BlogReadidIndexImport } from './routes/blog/read/[id]/index'
 
@@ -41,6 +42,12 @@ const AuthSignupRoute = AuthSignupImport.update({
 const AuthLoginRoute = AuthLoginImport.update({
   id: '/auth/login',
   path: '/auth/login',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SampleListIndexRoute = SampleListIndexImport.update({
+  id: '/sample/list/',
+  path: '/sample/list/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -95,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SampleslugIndexImport
       parentRoute: typeof rootRoute
     }
+    '/sample/list/': {
+      id: '/sample/list/'
+      path: '/sample/list'
+      fullPath: '/sample/list'
+      preLoaderRoute: typeof SampleListIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/blog/read/[id]/': {
       id: '/blog/read/[id]/'
       path: '/blog/read/[id]'
@@ -113,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/auth/signup': typeof AuthSignupRoute
   '/blog/list': typeof BlogListRoute
   '/sample/[slug]': typeof SampleslugIndexRoute
+  '/sample/list': typeof SampleListIndexRoute
   '/blog/read/[id]': typeof BlogReadidIndexRoute
 }
 
@@ -122,6 +137,7 @@ export interface FileRoutesByTo {
   '/auth/signup': typeof AuthSignupRoute
   '/blog/list': typeof BlogListRoute
   '/sample/[slug]': typeof SampleslugIndexRoute
+  '/sample/list': typeof SampleListIndexRoute
   '/blog/read/[id]': typeof BlogReadidIndexRoute
 }
 
@@ -132,6 +148,7 @@ export interface FileRoutesById {
   '/auth/signup': typeof AuthSignupRoute
   '/blog/list': typeof BlogListRoute
   '/sample/[slug]/': typeof SampleslugIndexRoute
+  '/sample/list/': typeof SampleListIndexRoute
   '/blog/read/[id]/': typeof BlogReadidIndexRoute
 }
 
@@ -143,6 +160,7 @@ export interface FileRouteTypes {
     | '/auth/signup'
     | '/blog/list'
     | '/sample/[slug]'
+    | '/sample/list'
     | '/blog/read/[id]'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -151,6 +169,7 @@ export interface FileRouteTypes {
     | '/auth/signup'
     | '/blog/list'
     | '/sample/[slug]'
+    | '/sample/list'
     | '/blog/read/[id]'
   id:
     | '__root__'
@@ -159,6 +178,7 @@ export interface FileRouteTypes {
     | '/auth/signup'
     | '/blog/list'
     | '/sample/[slug]/'
+    | '/sample/list/'
     | '/blog/read/[id]/'
   fileRoutesById: FileRoutesById
 }
@@ -169,6 +189,7 @@ export interface RootRouteChildren {
   AuthSignupRoute: typeof AuthSignupRoute
   BlogListRoute: typeof BlogListRoute
   SampleslugIndexRoute: typeof SampleslugIndexRoute
+  SampleListIndexRoute: typeof SampleListIndexRoute
   BlogReadidIndexRoute: typeof BlogReadidIndexRoute
 }
 
@@ -178,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthSignupRoute: AuthSignupRoute,
   BlogListRoute: BlogListRoute,
   SampleslugIndexRoute: SampleslugIndexRoute,
+  SampleListIndexRoute: SampleListIndexRoute,
   BlogReadidIndexRoute: BlogReadidIndexRoute,
 }
 
@@ -196,6 +218,7 @@ export const routeTree = rootRoute
         "/auth/signup",
         "/blog/list",
         "/sample/[slug]/",
+        "/sample/list/",
         "/blog/read/[id]/"
       ]
     },
@@ -213,6 +236,9 @@ export const routeTree = rootRoute
     },
     "/sample/[slug]/": {
       "filePath": "sample/[slug]/index.tsx"
+    },
+    "/sample/list/": {
+      "filePath": "sample/list/index.tsx"
     },
     "/blog/read/[id]/": {
       "filePath": "blog/read/[id]/index.tsx"

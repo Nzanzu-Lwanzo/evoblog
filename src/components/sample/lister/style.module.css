@@ -1,44 +1,45 @@
-.blog__card {
+.lister__section {
+    min-height: calc(100dvh - 140px);
+    /* 140px = height of the header plus height of the footer */
+
+    width: 1000px;
+    margin: auto;
+    padding: 3rem 1rem;
+
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: .5rem;
-    padding-block: 2rem;
+    gap: 1rem;
+}
+
+.list__element {
+    padding: 1rem;
 
     &:not(:last-of-type) {
         border-bottom: 1px solid #555;
     }
 }
 
-.meta__infos {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: .5rem;
+.tag {
+    font-weight: bold;
     font-size: .8rem;
-
-    .author__name {
-        font-weight: bold;
-    }
-}
-
-.date {
-    color: var(--smooth-text);
 }
 
 .title {
-    font-size: 1.6rem;
-    color: var(--accent);
     font-weight: bold;
+    font-size: 1.4rem;
+    color: var(--accent);
+    margin-block: .6rem;
 }
 
-.introduction {
-    line-height: 1.5rem;
-    color: var(--smooth-text);
+.details {
     font-size: .9rem;
+    color: var(--smooth-text);
+    line-height: 1.3rem;
+    margin-bottom: .5rem;
 }
 
-.read__article {
+.view__button {
     display: flex;
     align-items: center;
     justify-content: flex-start;

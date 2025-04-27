@@ -1,4 +1,5 @@
 import style from './style.module.css'
+import SwitchTheme from '../swicthTheme'
 
 const Footer = () => {
     return (
@@ -7,7 +8,7 @@ const Footer = () => {
                 <p>Built with love and <a target="_blank" href="https://youtu.be/iykvtX_ptyg?si=Trpl08IF0XktPHQ6" className={style.link__text}>rap music</a> by <a href="https://github.com/Nzanzu-Lwanzo" className={style.link__text}>Nzanzu Lwanzo</a></p>
             </div>
             <div>
-
+                <SwitchTheme />
             </div>
         </footer>
     )

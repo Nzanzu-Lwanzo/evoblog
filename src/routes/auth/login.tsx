@@ -6,7 +6,7 @@ export const Route = createFileRoute('/auth/login')({
 })
 
 function RouteComponent() {
-  return <main className='center' style={{ minHeight: 'calc(100dvh - 140px)' }}>
+  return <main className='center' style={{ minHeight: 'calc(100dvh - 140px)', paddingInline: '1rem' }}>
     <LogInForm />
   </main>
 }

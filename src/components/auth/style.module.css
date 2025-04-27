@@ -137,3 +137,15 @@
         opacity: 0;
     }
 }
+
+/* MEDIA QUERIES */
+@media only all and (max-width:425px) {
+
+    .form {
+        padding-inline: 16px;
+    }
+
+    .flex {
+        flex-direction: column;
+    }
+}

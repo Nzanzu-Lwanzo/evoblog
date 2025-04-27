@@ -1,7 +1,7 @@
 .article__card {
     width: 100%;
-    background-color: var(--contrast);
-    color: #FFF;
+    background-color: var(--black);
+    color: var(--white);
     padding: 1rem;
     border-radius: 4px;
 }

@@ -4,7 +4,7 @@
     flex-direction: column;
     gap: 10px;
     max-width: 500px;
-    background-color: #fff;
+    background-color: var(--white);
     padding: 20px;
     border-radius: 20px;
     position: relative;
@@ -116,7 +116,7 @@
     background-color: var(--accent);
     padding: 10px;
     border-radius: 10px;
-    color: #fff;
+    color: var(--white);
     font-size: 16px;
     transform: .3s ease;
     cursor: pointer;

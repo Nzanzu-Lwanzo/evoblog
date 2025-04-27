@@ -7,8 +7,8 @@
     justify-content: space-evenly;
     gap: 1rem;
     font-size: .8rem;
-    border-top: 1px solid var(--contrast);
-    color: #555;
+    border-top: 1px solid var(--text-color);
+    color: var(--smooth-text);
 }
 
 .link__text {

@@ -1,8 +1,11 @@
 .section {
     min-height: 50dvh;
     width: 100%;
-    background-color: var(--contrast);
-    background: url('/svg/landing.svg')no-repeat center/cover;
+    /* background-color: var(--black); */
+    background-image: var(--landing-hero-background);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     position: relative;
 }
 
@@ -11,12 +14,12 @@
     margin: auto;
     font-weight: bold;
     padding: 2rem;
-    color: #FFF;
 }
 
 .big_title {
     font-weight: bold;
     line-height: 2.5rem;
+    color: var(--white);
 }
 
 .my__name {
@@ -36,6 +39,8 @@
 .input {
     width: 100%;
     border: 2px solid transparent;
+    background-color: var(--white);
+    color: var(--black);
 
     &:focus-within {
         border-color: var(--accent);
@@ -44,7 +49,7 @@
 
 .button {
     background-color: var(--accent);
-    color: #FFF;
+    color: var(--white);
     transition: .2s ease-out;
     cursor: pointer;
     display: flex;

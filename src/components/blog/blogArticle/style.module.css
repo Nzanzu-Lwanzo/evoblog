@@ -18,7 +18,7 @@
 }
 
 .date {
-    color: #555;
+    color: var(--smooth-text);
 }
 
 .title {
@@ -29,7 +29,7 @@
 
 .introduction {
     line-height: 1.5rem;
-    color: #555;
+    color: var(--smooth-text);
     font-size: .9rem;
 }
 
@@ -40,7 +40,7 @@
     gap: 1rem;
     font-size: .8rem;
     align-self: flex-start;
-    color: #555;
+    color: var(--smooth-text);
 
     &,
     .icon {

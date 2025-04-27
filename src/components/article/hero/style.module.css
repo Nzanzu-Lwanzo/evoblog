@@ -1,7 +1,7 @@
 .section {
     min-height: 40dvh;
     width: 100%;
-    background-color: var(--contrast);
+    background-color: var(--text-color);
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -11,7 +11,7 @@
 
 .content__card {
     height: 100%;
-    color: #FFF;
+    color: var(--background-color);
     gap: 2rem;
     justify-content: center;
 }

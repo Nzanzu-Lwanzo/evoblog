@@ -1,0 +1,104 @@
+:root {
+    --header: 70px;
+    --black: #191919;
+    --accent: #1A73E8;
+    --white: #FFF;
+    --smooth-text: #555;
+}
+
+/* Light Mode (par défaut) */
+@media (prefers-color-scheme: light) {
+    body {
+        --background-color: var(--white);
+        --text-color: var(--black);
+        --accent-color: var(--accent);
+        --smooth-text: var(--smooth-text);
+
+        /* Images */
+        --landing-hero-background: url('/svg/landing_b.svg');
+        --image-grayscale: 0;
+        --image-opacity: 100%;
+    }
+
+
+    .square__bg {
+        width: 100%;
+        --color: rgba(114, 114, 114, 0.3);
+        background-color: #191a1a;
+        background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
+            linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
+        background-size: 55px 55px;
+    }
+}
+
+body.light {
+    --background-color: var(--white);
+    --text-color: var(--black);
+    --accent-color: var(--accent);
+    --smooth-text: var(--smooth-text);
+
+    /* Images */
+    --landing-hero-background: url('/svg/landing_b.svg');
+    --image-grayscale: 0;
+    --image-opacity: 100%;
+
+
+
+    .square__bg {
+        width: 100%;
+        --color: rgba(114, 114, 114, 0.3);
+        background-color: #191a1a;
+        background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
+            linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
+        background-size: 55px 55px;
+    }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    body {
+        --background-color: var(--black);
+        --text-color: var(--white);
+        --accent-color: var(--accent);
+        --smooth-text: var(--text-color);
+
+        /* Images */
+        --landing-hero-background: url('/svg/landing_b.svg');
+        --image-grayscale: 50%;
+        --image-opacity: 90%;
+    }
+
+    .square__bg {
+        width: 100%;
+        height: 100%;
+        --color: #E1E1E1;
+        background-color: #F3F3F3;
+        background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
+            linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
+        background-size: 55px 55px;
+    }
+}
+
+body.dark {
+    body {
+        --background-color: var(--black);
+        --text-color: var(--white);
+        --accent-color: var(--accent);
+        --smooth-text: var(--text-color);
+
+        /* Images */
+        --landing-hero-background: url('/svg/landing_b.svg');
+        --image-grayscale: 50%;
+        --image-opacity: 90%;
+    }
+
+    .square__bg {
+        width: 100%;
+        height: 100%;
+        --color: #E1E1E1;
+        background-color: #F3F3F3;
+        background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
+            linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
+        background-size: 55px 55px;
+    }
+}

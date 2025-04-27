@@ -50,7 +50,8 @@
     color: inherit;
 
     &:hover {
-        background-color: #EEE;
+        background-color: var(--text-color);
+        color: var(--background-color);
     }
 }
 
@@ -67,20 +68,21 @@
     .header {
         position: sticky;
         top: 0;
-        background-color: #FFF;
+        background-color: var(--background-color);
         z-index: 5;
     }
 
     .navbar {
         position: fixed;
         inset: 0;
-        background-color: #222;
+        background-color: var(--background-color);
         flex-direction: column;
         justify-content: center;
         padding: 1rem;
         top: var(--header);
         transform: translateX(100%);
         transition: .2s ease-out;
+        border-top: 1px solid var(--text-color);
     }
 
     .navbar.active {
@@ -89,15 +91,15 @@
 
     .navlink {
         text-decoration: none;
-        color: #FFF;
+        color: var(--text-color);
         display: inline-block;
         width: 100%;
         padding: 1rem;
         border-radius: 4px;
 
         &:hover {
-            background-color: var(--contrast);
-            color: #FFF;
+            background-color: var(--accent);
+            color: var(--white);
         }
     }
 }

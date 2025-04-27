@@ -37,13 +37,13 @@
     height: 35px;
     width: 35px;
     border-radius: 50%;
-    color: #FFF;
-    background-color: #222;
+    background-color: var(--background-color);
+    color: var(--text-color);
     transition: .3s ease-out;
 
     &:hover {
         transform: translateX(4px);
-        color: #FFF;
+        color: var(--white);
     }
 }
 
@@ -84,6 +84,7 @@
 @media only all and (max-width:1200px) {
     .section {
         all: initial;
+        color: var(--text-color);
     }
 
     .list__articles {

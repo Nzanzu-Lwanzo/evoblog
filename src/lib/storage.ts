@@ -8,10 +8,12 @@ export const saveToLocalStorage = (key: string, value: any): void => {
     }
 };
 
-export const getFromLocalStorage = (key: string): any | null => {
+export const getFromLocalStorage = <T>(key: string): T | null => {
     try {
+
         const serializedValue = localStorage.getItem(key);
-        return serializedValue ? JSON.parse(serializedValue) : null;
+        return serializedValue ? JSON.parse(serializedValue) as T : null;
+
     } catch (error) {
         console.error("Error retrieving from localStorage", error);
         return null;

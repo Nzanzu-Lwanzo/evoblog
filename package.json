@@ -17,7 +17,9 @@
     "lucide-react": "^0.503.0",
     "nanoid": "^5.1.5",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-fox-toast": "^1.10.20",
+    "zod": "^3.24.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",

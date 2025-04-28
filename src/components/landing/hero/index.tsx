@@ -3,13 +3,21 @@ import { MoveRight } from 'lucide-react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { useRef } from 'react'
+import Loader from '../../__global__/Loader'
+import { useSubscribeToNewsletter } from '../../../lib/hooks/newsletter'
+import { getFromLocalStorage } from '../../../lib/storage'
+import { LOCAL_STORAGE_KEYS } from '../../../lib/enums'
+import { SubscriberType } from '../../../firebase/@types'
 
 gsap.registerPlugin(useGSAP)
 
 const LandingHero = () => {
 
+  const { subscribeToNewsletter, loading } = useSubscribeToNewsletter()
   const sectionRef = useRef<HTMLElement | null>(null);
   const buttonContainerRef = useRef<HTMLButtonElement | null>(null)
+  const subscrptionData = getFromLocalStorage<SubscriberType>(LOCAL_STORAGE_KEYS.SUBSCRIPTION_DATA)
+  const isSubscribed = !!subscrptionData?.contact
 
   useGSAP(() => {
     gsap.from(`.${style.content}`, {
@@ -37,14 +45,28 @@ const LandingHero = () => {
   return (
     <section className={`center ${style.section}`} ref={sectionRef}>
       <div className={style.content}>
-        <h1 className={style.big_title}>Salut ! Je suis <span className={style.my__name}>Victor Nzanzu</span>, développeur web et romancier basé en République démocratique du Congo. J'aime partager ce que je connais, ce que j'aime et ce que je pense. Intéressés ? Abonnez-vous à ma newsletter.</h1>
-        <form className={style.newsletter__form}>
-          <input type="email" placeholder='tupac@gmail.com' className={style.input} />
+        <h1 className={style.big_title}>
+          Salut {subscrptionData?.name && (<span className={style.user__name}>{subscrptionData?.name}</span>)} ! Je suis <span className={style.user__name}>Victor Nzanzu</span>, développeur web et romancier basé en République démocratique du Congo. J'aime partager ce que je connais, ce que j'aime et ce que je pense. {!subscrptionData?.contact && "Intéressés ? Abonnez-vous à ma newsletter."}
+        </h1>
+        <form className={style.newsletter__form} onSubmit={subscribeToNewsletter}>
+          <input
+            type="text"
+            name='contact'
+            placeholder='tupac@gmail.com'
+            className={style.input}
+            disabled={loading || isSubscribed}
+            defaultValue={subscrptionData?.contact}
+          />
           <span ref={buttonContainerRef}>
-            <button type="submit" className={style.button}>
-              <span>S'abonner</span>
+            <button
+              type="submit"
+              className={style.button}
+              disabled={loading || isSubscribed}>
+              <span>
+                {isSubscribed ? 'Abonné' : "S'abonner"}
+              </span>
               <span className={`center ${style.icon}`}>
-                <MoveRight size={20} />
+                {loading ? <Loader /> : <MoveRight size={20} />}
               </span>
             </button>
           </span>

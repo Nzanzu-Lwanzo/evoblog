@@ -22,7 +22,7 @@
     color: var(--white);
 }
 
-.my__name {
+.user__name {
     font-weight: bold;
     color: var(--accent);
 }
@@ -63,6 +63,10 @@
 
     &:hover .icon {
         transform: translateX(3px);
+    }
+
+    &:disabled {
+        background-color: var(--disabled);
     }
 }
 

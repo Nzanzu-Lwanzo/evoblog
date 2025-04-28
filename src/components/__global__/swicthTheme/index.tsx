@@ -7,7 +7,10 @@ export type ThemeType = "light" | "dark"
 
 const SwitchTheme = () => {
 
-    const localStoageTheme = getFromLocalStorage(LOCAL_STORAGE_KEYS.THEME) || 'light'
+    const localStoageTheme = getFromLocalStorage<
+        ThemeType | undefined
+    >(LOCAL_STORAGE_KEYS.THEME) || 'light'
+
     const [theme, setTheme] = useState<ThemeType>(localStoageTheme)
 
     useEffect(() => {

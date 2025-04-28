@@ -49,14 +49,18 @@ const LandingHero = () => {
           Salut {subscrptionData?.name && (<span className={style.user__name}>{subscrptionData?.name}</span>)} ! Je suis <span className={style.user__name}>Victor Nzanzu</span>, développeur web et romancier basé en République démocratique du Congo. J'aime partager ce que je connais, ce que j'aime et ce que je pense. {!subscrptionData?.contact && "Intéressés ? Abonnez-vous à ma newsletter."}
         </h1>
         <form className={style.newsletter__form} onSubmit={subscribeToNewsletter}>
-          <input
-            type="text"
-            name='contact'
-            placeholder='tupac@gmail.com'
-            className={style.input}
-            disabled={loading || isSubscribed}
-            defaultValue={subscrptionData?.contact}
-          />
+          <div className={style.input__container}>
+            <label htmlFor="contact" className={style.label}>Email ou numéro SMS</label>
+            <input
+              type="text"
+              name='contact'
+              id='contact'
+              placeholder='tupac@gmail.com ou 0998855666'
+              className={style.input}
+              disabled={loading || isSubscribed}
+              defaultValue={subscrptionData?.contact}
+            />
+          </div>
           <span ref={buttonContainerRef}>
             <button
               type="submit"

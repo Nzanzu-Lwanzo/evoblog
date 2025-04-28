@@ -12,11 +12,14 @@
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "@tanstack/react-router": "^1.117.1",
+    "firebase": "^11.6.1",
     "gsap": "^3.12.7",
     "lucide-react": "^0.503.0",
     "nanoid": "^5.1.5",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-fox-toast": "^1.10.20",
+    "zod": "^3.24.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",

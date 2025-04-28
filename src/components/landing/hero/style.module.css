@@ -22,18 +22,28 @@
     color: var(--white);
 }
 
-.my__name {
+.user__name {
     font-weight: bold;
     color: var(--accent);
 }
 
 .newsletter__form {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: flex-start;
     width: 100%;
     gap: 1rem;
     margin-top: 1rem;
+}
+
+.input__container {
+    width: 100%;
+}
+
+.label {
+    font-size: .8rem;
+    margin-bottom: .5rem;
+    display: inline-block;
 }
 
 .input {
@@ -63,6 +73,10 @@
 
     &:hover .icon {
         transform: translateX(3px);
+    }
+
+    &:disabled {
+        background-color: var(--disabled);
     }
 }
 

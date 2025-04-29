@@ -17,7 +17,7 @@ import { Route as AuthSignupImport } from './routes/auth/signup'
 import { Route as AuthLoginImport } from './routes/auth/login'
 import { Route as SampleListIndexImport } from './routes/sample/list/index'
 import { Route as SampleslugIndexImport } from './routes/sample/[slug]/index'
-import { Route as BlogReadidIndexImport } from './routes/blog/read/[id]/index'
+import { Route as BlogReadSlugIndexImport } from './routes/blog/read/$slug/index'
 
 // Create/Update Routes
 
@@ -57,9 +57,9 @@ const SampleslugIndexRoute = SampleslugIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const BlogReadidIndexRoute = BlogReadidIndexImport.update({
-  id: '/blog/read/[id]/',
-  path: '/blog/read/[id]/',
+const BlogReadSlugIndexRoute = BlogReadSlugIndexImport.update({
+  id: '/blog/read/$slug/',
+  path: '/blog/read/$slug/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -109,11 +109,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SampleListIndexImport
       parentRoute: typeof rootRoute
     }
-    '/blog/read/[id]/': {
-      id: '/blog/read/[id]/'
-      path: '/blog/read/[id]'
-      fullPath: '/blog/read/[id]'
-      preLoaderRoute: typeof BlogReadidIndexImport
+    '/blog/read/$slug/': {
+      id: '/blog/read/$slug/'
+      path: '/blog/read/$slug'
+      fullPath: '/blog/read/$slug'
+      preLoaderRoute: typeof BlogReadSlugIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -128,7 +128,7 @@ export interface FileRoutesByFullPath {
   '/blog/list': typeof BlogListRoute
   '/sample/[slug]': typeof SampleslugIndexRoute
   '/sample/list': typeof SampleListIndexRoute
-  '/blog/read/[id]': typeof BlogReadidIndexRoute
+  '/blog/read/$slug': typeof BlogReadSlugIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -138,7 +138,7 @@ export interface FileRoutesByTo {
   '/blog/list': typeof BlogListRoute
   '/sample/[slug]': typeof SampleslugIndexRoute
   '/sample/list': typeof SampleListIndexRoute
-  '/blog/read/[id]': typeof BlogReadidIndexRoute
+  '/blog/read/$slug': typeof BlogReadSlugIndexRoute
 }
 
 export interface FileRoutesById {
@@ -149,7 +149,7 @@ export interface FileRoutesById {
   '/blog/list': typeof BlogListRoute
   '/sample/[slug]/': typeof SampleslugIndexRoute
   '/sample/list/': typeof SampleListIndexRoute
-  '/blog/read/[id]/': typeof BlogReadidIndexRoute
+  '/blog/read/$slug/': typeof BlogReadSlugIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -161,7 +161,7 @@ export interface FileRouteTypes {
     | '/blog/list'
     | '/sample/[slug]'
     | '/sample/list'
-    | '/blog/read/[id]'
+    | '/blog/read/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -170,7 +170,7 @@ export interface FileRouteTypes {
     | '/blog/list'
     | '/sample/[slug]'
     | '/sample/list'
-    | '/blog/read/[id]'
+    | '/blog/read/$slug'
   id:
     | '__root__'
     | '/'
@@ -179,7 +179,7 @@ export interface FileRouteTypes {
     | '/blog/list'
     | '/sample/[slug]/'
     | '/sample/list/'
-    | '/blog/read/[id]/'
+    | '/blog/read/$slug/'
   fileRoutesById: FileRoutesById
 }
 
@@ -190,7 +190,7 @@ export interface RootRouteChildren {
   BlogListRoute: typeof BlogListRoute
   SampleslugIndexRoute: typeof SampleslugIndexRoute
   SampleListIndexRoute: typeof SampleListIndexRoute
-  BlogReadidIndexRoute: typeof BlogReadidIndexRoute
+  BlogReadSlugIndexRoute: typeof BlogReadSlugIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -200,7 +200,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogListRoute: BlogListRoute,
   SampleslugIndexRoute: SampleslugIndexRoute,
   SampleListIndexRoute: SampleListIndexRoute,
-  BlogReadidIndexRoute: BlogReadidIndexRoute,
+  BlogReadSlugIndexRoute: BlogReadSlugIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -219,7 +219,7 @@ export const routeTree = rootRoute
         "/blog/list",
         "/sample/[slug]/",
         "/sample/list/",
-        "/blog/read/[id]/"
+        "/blog/read/$slug/"
       ]
     },
     "/": {
@@ -240,8 +240,8 @@ export const routeTree = rootRoute
     "/sample/list/": {
       "filePath": "sample/list/index.tsx"
     },
-    "/blog/read/[id]/": {
-      "filePath": "blog/read/[id]/index.tsx"
+    "/blog/read/$slug/": {
+      "filePath": "blog/read/$slug/index.tsx"
     }
   }
 }

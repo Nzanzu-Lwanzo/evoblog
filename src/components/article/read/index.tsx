@@ -2,6 +2,7 @@ import style from './style.module.css'
 import ArticleContent from './ArticleContent'
 import ScrollSpy from './Scrollspy'
 import Article from './Article';
+import { Post } from '../../../lib/@type';
 
 const sections = [
     { id: "intro", label: "Introduction" },
@@ -12,13 +13,14 @@ const sections = [
 ];
 
 
-const ReadArticle = () => {
+const ReadArticle = ({ post }: { post: Post }) => {
+    
     return (
         <section className={style.section}>
             <div className={style.summary__timeline}>
                 <ScrollSpy sections={sections} />
             </div>
-            <ArticleContent />
+            <ArticleContent post={post} />
             <div className={style.list__articles}>
                 <Article />
                 <Article />

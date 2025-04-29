@@ -2,19 +2,22 @@ import style from './style.module.css'
 import { Link } from '@tanstack/react-router'
 import { MoveRight } from 'lucide-react'
 import Avatar from '../../__global__/avatar'
+import { Post } from '../../../lib/@type'
+import { displayAuthorsNames, formatDateTime } from '../../../lib/helpers'
+import { buildImage } from '../../../backend/client'
 
-const BlogArticle = () => {
+const BlogArticle = ({ post }: { post: Post }) => {
     return (
         <div className={style.blog__card}>
             <div className={style.meta__infos}>
-                <Avatar img={{ src: '/img/user.jpg' }} />
-                <p className={style.date}>par <span className={style.author__name}>Grace Kazingufu</span> le 13.12.2025</p>
+                <Avatar img={{ src: buildImage(post.authors[0].image) || '/img/user.jpg' }} />
+                <p className={style.date}>par <span className={style.author__name}>{displayAuthorsNames(post.authors)}</span> le {formatDateTime(post._updatedAt)}</p>
             </div>
-            <h4 className={style.title}>Comment protéger un stream de toute corruption</h4>
+            <h4 className={style.title}>{post.title}</h4>
             <p className={style.introduction}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est quia exercitationem quas expedita numquam nobis consequatur sed, vero ipsam vitae quos nihil veniam, obcaecati esse inventore labore delectus at. Numquam!
+                {post.description}
             </p>
-            <Link to='/blog/read/[id]' params={{ id: 'clasdhfowuihdfoa' }} className={style.read__article}>
+            <Link to="/blog/read/$slug" params={{ slug: post.slug.current }} className={style.read__article}>
                 <span>Lire cet article</span>
                 <span className={`center ${style.icon}`}>
                     <MoveRight size={20} stroke='currentColor' />

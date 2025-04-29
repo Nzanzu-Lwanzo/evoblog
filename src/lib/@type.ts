@@ -1,0 +1,60 @@
+import { SanityImageSource } from "@sanity/image-url/lib/types/types"
+
+type Slug = {
+    _type: "slug";
+    current: string;
+};
+
+export interface Post {
+    _id: string
+    title: string
+    slug: Slug
+    image?: SanityImageSource
+    description: string
+    content: unknown;
+    category: Category
+    tags: Tag[]
+    shortUrl?: string;
+    authors: Author[]
+    _updatedAt: string
+    _createdAt: string
+}
+
+export interface Tag {
+    _id: string
+    name: string
+
+}
+
+export interface Category {
+    _id: string
+    name: string
+    description?: string
+}
+
+export interface Author {
+    _id: string
+    name: string
+    image?: SanityImageSource
+}
+
+export interface Artist {
+    _id: string
+    name: string
+}
+
+export interface Song {
+    _id: string
+    title: string
+    videoId: string;
+    releaseYear: string;
+    artists: Artist[]
+    _updatedAt: string
+    _createdAt: string
+}
+
+export interface Sample {
+    context: unknown;
+    original: Song;
+    samplers: Song[]
+}

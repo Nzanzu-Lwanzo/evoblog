@@ -1,12 +1,13 @@
 import style from './style.module.css'
 import ActionsOnArticle from './ActionsOnArticle'
+import { Post } from '../../../lib/@type'
 
-const ArticleContent = () => {
+const ArticleContent = ({ post }: { post: Post }) => {
     return (
         <article className={style.article}>
             <h2 id='intro'>Introduction</h2>
             <p>
-                Les applications web en temps réel, qu’il s’agisse de visioconférences, de chats vidéo ou de partages d'écran, reposent souvent sur des technologies RTC (Real-Time Communication) comme WebRTC. Intégrer de telles fonctionnalités dans un projet Django ouvre des perspectives puissantes, mais soulève aussi de nombreuses questions de sécurité.
+                {post.description}
             </p>
 
             <img src="/img/django-logo.png" alt="Django logo" />

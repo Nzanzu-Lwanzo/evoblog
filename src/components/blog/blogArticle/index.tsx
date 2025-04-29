@@ -3,15 +3,15 @@ import { Link } from '@tanstack/react-router'
 import { MoveRight } from 'lucide-react'
 import Avatar from '../../__global__/avatar'
 import { Post } from '../../../lib/@type'
-import { displayAuthorsNames, formatDateTime } from '../../../lib/helpers'
+import { formatDateTime } from '../../../lib/helpers'
 import { buildImage } from '../../../backend/client'
 
 const BlogArticle = ({ post }: { post: Post }) => {
     return (
         <div className={style.blog__card}>
             <div className={style.meta__infos}>
-                <Avatar img={{ src: buildImage(post.authors[0].image) || '/img/user.jpg' }} />
-                <p className={style.date}>par <span className={style.author__name}>{displayAuthorsNames(post.authors)}</span> le {formatDateTime(post._updatedAt)}</p>
+                <Avatar img={{ src: buildImage(post.author.image) || '/img/user.jpg' }} />
+                <p className={style.date}>par <span className={style.author__name}>{post.author.name}</span> le {formatDateTime(post._updatedAt)}</p>
             </div>
             <h4 className={style.title}>{post.title}</h4>
             <p className={style.introduction}>

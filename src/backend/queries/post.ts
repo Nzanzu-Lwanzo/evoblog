@@ -8,7 +8,7 @@ export const getPosts = async () => {
             title,
             slug,
             description,
-            authors[]->{
+            author->{
                 _id,
                 name,
                 image
@@ -27,7 +27,7 @@ export const getPost = async (slug: string) => {
             slug,
             description,
             content,
-            authors[]->{
+            author->{
                 _id,
                 name,
                 image
@@ -38,6 +38,5 @@ export const getPost = async (slug: string) => {
         { slug }
     )
 
-    console.log(post)
     return post
 }

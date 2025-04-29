@@ -15,7 +15,7 @@ export interface Post {
     category: Category
     tags: Tag[]
     shortUrl?: string;
-    authors: Author[]
+    author: Author
     _updatedAt: string
     _createdAt: string
 }

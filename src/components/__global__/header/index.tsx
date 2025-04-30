@@ -24,7 +24,7 @@ const Header = () => {
     <header className={style.header}>
       <div className={style.logo}>
         <Avatar img={{ src: '/img/logo.jpeg' }} dims={55} />
-        <span style={{ fontWeight: "bold" }}>Wesside</span>
+        <span style={{ fontWeight: "bold" }}>0'Lwanzo</span>
       </div>
       <nav className={`${style.navbar} ${showMobileMenu && style.active}`}>
         <Link to="/" className={style.navlink} onClick={onNavigation}>Acceuil</Link>

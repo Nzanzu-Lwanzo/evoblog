@@ -5,6 +5,8 @@ import Avatar from '../../__global__/avatar'
 import { Post } from '../../../lib/@type'
 import { formatDateTime } from '../../../lib/helpers'
 import { buildImage } from '../../../backend/client'
+import { Route as ReadBlogRoute } from '../../../routes/blog/read/$slug'
+
 
 const BlogArticle = ({ post }: { post: Post }) => {
     return (
@@ -17,7 +19,7 @@ const BlogArticle = ({ post }: { post: Post }) => {
             <p className={style.introduction}>
                 {post.description}
             </p>
-            <Link to="/blog/read/$slug" params={{ slug: post.slug.current }} className={style.read__article}>
+            <Link to={ReadBlogRoute.to} params={{ slug: post.slug.current }} className={style.read__article}>
                 <span>Lire cet article</span>
                 <span className={`center ${style.icon}`}>
                     <MoveRight size={20} stroke='currentColor' />

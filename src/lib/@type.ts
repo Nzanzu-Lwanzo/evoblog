@@ -14,6 +14,7 @@ export interface Post {
     description: string
     content: PortableTextBlock;
     category: Category
+    morePosts: Post[]
     tags: Tag[]
     shortUrl?: string;
     author: Author

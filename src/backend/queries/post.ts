@@ -33,6 +33,22 @@ export const getPost = async (slug: string) => {
                 name,
                 image
             },
+            "morePosts" : *[
+                _type == "post" &&
+                references(^.category._ref) &&
+                slug.current != $slug
+            ][0...4] {
+                 _id,
+                title,
+                slug,
+                description,
+                author->{
+                    _id,
+                    name,
+                    image
+                },
+                _updatedAt
+            },
             _updatedAt,
             _createdAt
         }`,

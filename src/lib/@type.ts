@@ -1,4 +1,5 @@
 import { SanityImageSource } from "@sanity/image-url/lib/types/types"
+import { type PortableTextBlock } from "@portabletext/react";
 
 type Slug = {
     _type: "slug";
@@ -11,7 +12,7 @@ export interface Post {
     slug: Slug
     image?: SanityImageSource
     description: string
-    content: unknown;
+    content: PortableTextBlock;
     category: Category
     tags: Tag[]
     shortUrl?: string;

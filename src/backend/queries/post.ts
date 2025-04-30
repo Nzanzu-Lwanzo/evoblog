@@ -25,6 +25,7 @@ export const getPost = async (slug: string) => {
             _id,
             title,
             slug,
+            image,
             description,
             content,
             author->{

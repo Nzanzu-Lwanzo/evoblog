@@ -48,4 +48,5 @@ export function displayAuthorsNames(authors: Author[]) {
         `${authors.at(0)?.name} & ${authors.length - 1} autre${(authorsLength - 1) > 1 ? 's' : ''}`
 }
 
+
 export const fakeList = [0, 1, 2, 3, 4, 5, 6]

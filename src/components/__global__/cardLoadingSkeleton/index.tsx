@@ -1,6 +1,6 @@
 import style from './style.module.css'
 
-const BlogLoadingSkeleton = () => {
+const CardLoadingSkeleton = () => {
   return (
     <div className={style.blog__card}>
       <div className={style.meta__infos}>
@@ -18,4 +18,4 @@ const BlogLoadingSkeleton = () => {
   )
 }
 
-export default BlogLoadingSkeleton
+export default CardLoadingSkeleton

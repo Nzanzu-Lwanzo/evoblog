@@ -56,7 +56,12 @@ export interface Song {
 }
 
 export interface Sample {
-    context: unknown;
+    context: PortableTextBlock;
     original: Song;
     samplers: Song[]
+}
+
+export interface ForListSamples {
+    _id: string;
+    artists: string[]
 }

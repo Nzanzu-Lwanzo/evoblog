@@ -2,14 +2,19 @@ import { useRef } from 'react';
 import { gsap } from 'gsap';
 import style from './style.module.css';
 import { useGSAP } from '@gsap/react';
+import { useViewSampleContext } from '../../../contexts/ViewSampleContext';
+import Original from './Original';
+import Sampler from './Sampler';
 
 gsap.registerPlugin(useGSAP)
 
 const SampleHero = () => {
+
+  const ctx = useViewSampleContext()
   const sectionRef = useRef<HTMLHtmlElement | null>(null)
   const titleRef = useRef<HTMLHRElement | null>(null);
-  const jColeRef = useRef<HTMLSpanElement | null>(null);
-  const erykahBaduRef = useRef<HTMLSpanElement | null>(null);
+  const originalRef = useRef<HTMLSpanElement | null>(null);
+  const samplerRef = useRef<HTMLSpanElement | null>(null);
 
   useGSAP(() => {
     // Animation du h1 principal
@@ -23,8 +28,8 @@ const SampleHero = () => {
     const tl = gsap.timeline()
 
     // Animation lettre par lettre pour J Cole
-    if (jColeRef.current) {
-      const jColeLetters = jColeRef.current.querySelectorAll('span');
+    if (originalRef.current) {
+      const jColeLetters = originalRef.current.querySelectorAll('span');
       tl.from(jColeLetters, {
         opacity: 0,
         y: 20,
@@ -36,8 +41,8 @@ const SampleHero = () => {
     }
 
     // Animation lettre par lettre pour Erykah Badu
-    if (erykahBaduRef.current) {
-      const erykahBaduLetters = erykahBaduRef.current.querySelectorAll('span');
+    if (samplerRef.current) {
+      const erykahBaduLetters = samplerRef.current.querySelectorAll('span');
       tl.from(erykahBaduLetters, {
         opacity: 0,
         y: 20,
@@ -50,27 +55,13 @@ const SampleHero = () => {
 
   }, { scope: sectionRef });
 
-  const wrapLetters = (text: string) =>
-    text.split('').map((letter, index) => (
-      letter === "|" ? (<span key={index}>{" "}</span>) : (
-        <span key={index} style={{ display: 'inline-block' }}>
-          {letter}
-        </span>
-      )
-    ));
-
   return (
     <section ref={sectionRef} className={`square__bg center ${style.section}`}>
       <div style={{ height: '100%' }}>
         <h1 ref={titleRef} className={style.big__title}>
           Da Sample <br />
-          <span ref={jColeRef} className={style.artist}>
-            {wrapLetters('J|Cole')}
-          </span>{' '}
-          vs{' '}
-          <span ref={erykahBaduRef} className={style.artist}>
-            {wrapLetters('Erykah|Badu')}
-          </span>
+          {ctx?.sample && <Original ref={originalRef} sample={ctx.sample} />}{' '}vs{' '}
+          {ctx?.sample && <Sampler ref={samplerRef} sample={ctx.sample} />}
         </h1>
       </div>
     </section>

@@ -1,7 +1,7 @@
 import style from './style.module.css'
 import BlogArticle from './blogArticle'
 import { useGetPosts } from '../../lib/hooks/post'
-import BlogLoadingSkeleton from './blogLoadingSkeleton'
+import CardLoadingSkeleton from '../__global__/cardLoadingSkeleton'
 import { fakeList } from '../../lib/helpers'
 
 const BlogLister = () => {
@@ -13,7 +13,7 @@ const BlogLister = () => {
             {isFetching ? (
                 <>
                     {fakeList.map(() => {
-                        return <BlogLoadingSkeleton />
+                        return <CardLoadingSkeleton />
                     })}
                 </>
             ) : (

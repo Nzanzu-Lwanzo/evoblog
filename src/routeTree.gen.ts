@@ -16,7 +16,7 @@ import { Route as BlogListImport } from './routes/blog/list'
 import { Route as AuthSignupImport } from './routes/auth/signup'
 import { Route as AuthLoginImport } from './routes/auth/login'
 import { Route as SampleListIndexImport } from './routes/sample/list/index'
-import { Route as SampleslugIndexImport } from './routes/sample/[slug]/index'
+import { Route as SampleIdIndexImport } from './routes/sample/$id/index'
 import { Route as BlogReadSlugIndexImport } from './routes/blog/read/$slug/index'
 
 // Create/Update Routes
@@ -51,9 +51,9 @@ const SampleListIndexRoute = SampleListIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const SampleslugIndexRoute = SampleslugIndexImport.update({
-  id: '/sample/[slug]/',
-  path: '/sample/[slug]/',
+const SampleIdIndexRoute = SampleIdIndexImport.update({
+  id: '/sample/$id/',
+  path: '/sample/$id/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -95,11 +95,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogListImport
       parentRoute: typeof rootRoute
     }
-    '/sample/[slug]/': {
-      id: '/sample/[slug]/'
-      path: '/sample/[slug]'
-      fullPath: '/sample/[slug]'
-      preLoaderRoute: typeof SampleslugIndexImport
+    '/sample/$id/': {
+      id: '/sample/$id/'
+      path: '/sample/$id'
+      fullPath: '/sample/$id'
+      preLoaderRoute: typeof SampleIdIndexImport
       parentRoute: typeof rootRoute
     }
     '/sample/list/': {
@@ -126,7 +126,7 @@ export interface FileRoutesByFullPath {
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/blog/list': typeof BlogListRoute
-  '/sample/[slug]': typeof SampleslugIndexRoute
+  '/sample/$id': typeof SampleIdIndexRoute
   '/sample/list': typeof SampleListIndexRoute
   '/blog/read/$slug': typeof BlogReadSlugIndexRoute
 }
@@ -136,7 +136,7 @@ export interface FileRoutesByTo {
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/blog/list': typeof BlogListRoute
-  '/sample/[slug]': typeof SampleslugIndexRoute
+  '/sample/$id': typeof SampleIdIndexRoute
   '/sample/list': typeof SampleListIndexRoute
   '/blog/read/$slug': typeof BlogReadSlugIndexRoute
 }
@@ -147,7 +147,7 @@ export interface FileRoutesById {
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
   '/blog/list': typeof BlogListRoute
-  '/sample/[slug]/': typeof SampleslugIndexRoute
+  '/sample/$id/': typeof SampleIdIndexRoute
   '/sample/list/': typeof SampleListIndexRoute
   '/blog/read/$slug/': typeof BlogReadSlugIndexRoute
 }
@@ -159,7 +159,7 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/signup'
     | '/blog/list'
-    | '/sample/[slug]'
+    | '/sample/$id'
     | '/sample/list'
     | '/blog/read/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -168,7 +168,7 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/signup'
     | '/blog/list'
-    | '/sample/[slug]'
+    | '/sample/$id'
     | '/sample/list'
     | '/blog/read/$slug'
   id:
@@ -177,7 +177,7 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/signup'
     | '/blog/list'
-    | '/sample/[slug]/'
+    | '/sample/$id/'
     | '/sample/list/'
     | '/blog/read/$slug/'
   fileRoutesById: FileRoutesById
@@ -188,7 +188,7 @@ export interface RootRouteChildren {
   AuthLoginRoute: typeof AuthLoginRoute
   AuthSignupRoute: typeof AuthSignupRoute
   BlogListRoute: typeof BlogListRoute
-  SampleslugIndexRoute: typeof SampleslugIndexRoute
+  SampleIdIndexRoute: typeof SampleIdIndexRoute
   SampleListIndexRoute: typeof SampleListIndexRoute
   BlogReadSlugIndexRoute: typeof BlogReadSlugIndexRoute
 }
@@ -198,7 +198,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthLoginRoute: AuthLoginRoute,
   AuthSignupRoute: AuthSignupRoute,
   BlogListRoute: BlogListRoute,
-  SampleslugIndexRoute: SampleslugIndexRoute,
+  SampleIdIndexRoute: SampleIdIndexRoute,
   SampleListIndexRoute: SampleListIndexRoute,
   BlogReadSlugIndexRoute: BlogReadSlugIndexRoute,
 }
@@ -217,7 +217,7 @@ export const routeTree = rootRoute
         "/auth/login",
         "/auth/signup",
         "/blog/list",
-        "/sample/[slug]/",
+        "/sample/$id/",
         "/sample/list/",
         "/blog/read/$slug/"
       ]
@@ -234,8 +234,8 @@ export const routeTree = rootRoute
     "/blog/list": {
       "filePath": "blog/list.tsx"
     },
-    "/sample/[slug]/": {
-      "filePath": "sample/[slug]/index.tsx"
+    "/sample/$id/": {
+      "filePath": "sample/$id/index.tsx"
     },
     "/sample/list/": {
       "filePath": "sample/list/index.tsx"

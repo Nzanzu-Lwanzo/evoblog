@@ -10,7 +10,7 @@ const SamplesListElement = ({ sample }: { sample: ForListSamples }) => {
             <p className={style.tag}>Da Sample by N.M.L 📀</p>
             <h3 className={style.title}>{sample.artists.join(" - ")}</h3>
             <p className={style.details}>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Beatae eum necessitatibus placeat dignissimos dolores sapiente voluptates iusto pariatur voluptate recusandae totam aut vitae voluptatibus molestias error doloremque, optio incidunt voluptas?
+                {sample.description}
             </p>
             <Link to={ViewSampleRoute.to} params={{ id: sample._id }} className={style.view__button}>
                 <span>Découvrir le sample</span>

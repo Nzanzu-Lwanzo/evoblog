@@ -63,5 +63,6 @@ export interface Sample {
 
 export interface ForListSamples {
     _id: string;
+    description:string
     artists: string[]
 }

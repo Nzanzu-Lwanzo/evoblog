@@ -6,6 +6,7 @@ export async function getSamples() {
     const samples = await client.fetch(`
       *[_type == "sample"] {
         _id,
+        description,
         "artists": [
             ...original->artists[]->name,
             ...samplers[]->artists[]->name

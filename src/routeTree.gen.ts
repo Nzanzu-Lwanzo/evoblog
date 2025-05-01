@@ -8,48 +8,55 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
-import { Route as BlogListImport } from './routes/blog/list'
-import { Route as AuthSignupImport } from './routes/auth/signup'
-import { Route as AuthLoginImport } from './routes/auth/login'
-import { Route as SampleListIndexImport } from './routes/sample/list/index'
 import { Route as SampleIdIndexImport } from './routes/sample/$id/index'
 import { Route as BlogReadSlugIndexImport } from './routes/blog/read/$slug/index'
 
+// Create Virtual Routes
+
+const IndexLazyImport = createFileRoute('/')()
+const BlogListLazyImport = createFileRoute('/blog/list')()
+const AuthSignupLazyImport = createFileRoute('/auth/signup')()
+const AuthLoginLazyImport = createFileRoute('/auth/login')()
+const SampleListIndexLazyImport = createFileRoute('/sample/list/')()
+
 // Create/Update Routes
 
-const IndexRoute = IndexImport.update({
+const IndexLazyRoute = IndexLazyImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
-const BlogListRoute = BlogListImport.update({
+const BlogListLazyRoute = BlogListLazyImport.update({
   id: '/blog/list',
   path: '/blog/list',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).lazy(() => import('./routes/blog/list.lazy').then((d) => d.Route))
 
-const AuthSignupRoute = AuthSignupImport.update({
+const AuthSignupLazyRoute = AuthSignupLazyImport.update({
   id: '/auth/signup',
   path: '/auth/signup',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).lazy(() => import('./routes/auth/signup.lazy').then((d) => d.Route))
 
-const AuthLoginRoute = AuthLoginImport.update({
+const AuthLoginLazyRoute = AuthLoginLazyImport.update({
   id: '/auth/login',
   path: '/auth/login',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).lazy(() => import('./routes/auth/login.lazy').then((d) => d.Route))
 
-const SampleListIndexRoute = SampleListIndexImport.update({
+const SampleListIndexLazyRoute = SampleListIndexLazyImport.update({
   id: '/sample/list/',
   path: '/sample/list/',
   getParentRoute: () => rootRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/sample/list/index.lazy').then((d) => d.Route),
+)
 
 const SampleIdIndexRoute = SampleIdIndexImport.update({
   id: '/sample/$id/',
@@ -71,28 +78,28 @@ declare module '@tanstack/react-router' {
       id: '/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexImport
+      preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
     '/auth/login': {
       id: '/auth/login'
       path: '/auth/login'
       fullPath: '/auth/login'
-      preLoaderRoute: typeof AuthLoginImport
+      preLoaderRoute: typeof AuthLoginLazyImport
       parentRoute: typeof rootRoute
     }
     '/auth/signup': {
       id: '/auth/signup'
       path: '/auth/signup'
       fullPath: '/auth/signup'
-      preLoaderRoute: typeof AuthSignupImport
+      preLoaderRoute: typeof AuthSignupLazyImport
       parentRoute: typeof rootRoute
     }
     '/blog/list': {
       id: '/blog/list'
       path: '/blog/list'
       fullPath: '/blog/list'
-      preLoaderRoute: typeof BlogListImport
+      preLoaderRoute: typeof BlogListLazyImport
       parentRoute: typeof rootRoute
     }
     '/sample/$id/': {
@@ -106,7 +113,7 @@ declare module '@tanstack/react-router' {
       id: '/sample/list/'
       path: '/sample/list'
       fullPath: '/sample/list'
-      preLoaderRoute: typeof SampleListIndexImport
+      preLoaderRoute: typeof SampleListIndexLazyImport
       parentRoute: typeof rootRoute
     }
     '/blog/read/$slug/': {
@@ -122,33 +129,33 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/auth/login': typeof AuthLoginRoute
-  '/auth/signup': typeof AuthSignupRoute
-  '/blog/list': typeof BlogListRoute
+  '/': typeof IndexLazyRoute
+  '/auth/login': typeof AuthLoginLazyRoute
+  '/auth/signup': typeof AuthSignupLazyRoute
+  '/blog/list': typeof BlogListLazyRoute
   '/sample/$id': typeof SampleIdIndexRoute
-  '/sample/list': typeof SampleListIndexRoute
+  '/sample/list': typeof SampleListIndexLazyRoute
   '/blog/read/$slug': typeof BlogReadSlugIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/auth/login': typeof AuthLoginRoute
-  '/auth/signup': typeof AuthSignupRoute
-  '/blog/list': typeof BlogListRoute
+  '/': typeof IndexLazyRoute
+  '/auth/login': typeof AuthLoginLazyRoute
+  '/auth/signup': typeof AuthSignupLazyRoute
+  '/blog/list': typeof BlogListLazyRoute
   '/sample/$id': typeof SampleIdIndexRoute
-  '/sample/list': typeof SampleListIndexRoute
+  '/sample/list': typeof SampleListIndexLazyRoute
   '/blog/read/$slug': typeof BlogReadSlugIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/auth/login': typeof AuthLoginRoute
-  '/auth/signup': typeof AuthSignupRoute
-  '/blog/list': typeof BlogListRoute
+  '/': typeof IndexLazyRoute
+  '/auth/login': typeof AuthLoginLazyRoute
+  '/auth/signup': typeof AuthSignupLazyRoute
+  '/blog/list': typeof BlogListLazyRoute
   '/sample/$id/': typeof SampleIdIndexRoute
-  '/sample/list/': typeof SampleListIndexRoute
+  '/sample/list/': typeof SampleListIndexLazyRoute
   '/blog/read/$slug/': typeof BlogReadSlugIndexRoute
 }
 
@@ -184,22 +191,22 @@ export interface FileRouteTypes {
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AuthLoginRoute: typeof AuthLoginRoute
-  AuthSignupRoute: typeof AuthSignupRoute
-  BlogListRoute: typeof BlogListRoute
+  IndexLazyRoute: typeof IndexLazyRoute
+  AuthLoginLazyRoute: typeof AuthLoginLazyRoute
+  AuthSignupLazyRoute: typeof AuthSignupLazyRoute
+  BlogListLazyRoute: typeof BlogListLazyRoute
   SampleIdIndexRoute: typeof SampleIdIndexRoute
-  SampleListIndexRoute: typeof SampleListIndexRoute
+  SampleListIndexLazyRoute: typeof SampleListIndexLazyRoute
   BlogReadSlugIndexRoute: typeof BlogReadSlugIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AuthLoginRoute: AuthLoginRoute,
-  AuthSignupRoute: AuthSignupRoute,
-  BlogListRoute: BlogListRoute,
+  IndexLazyRoute: IndexLazyRoute,
+  AuthLoginLazyRoute: AuthLoginLazyRoute,
+  AuthSignupLazyRoute: AuthSignupLazyRoute,
+  BlogListLazyRoute: BlogListLazyRoute,
   SampleIdIndexRoute: SampleIdIndexRoute,
-  SampleListIndexRoute: SampleListIndexRoute,
+  SampleListIndexLazyRoute: SampleListIndexLazyRoute,
   BlogReadSlugIndexRoute: BlogReadSlugIndexRoute,
 }
 
@@ -223,22 +230,22 @@ export const routeTree = rootRoute
       ]
     },
     "/": {
-      "filePath": "index.tsx"
+      "filePath": "index.lazy.tsx"
     },
     "/auth/login": {
-      "filePath": "auth/login.tsx"
+      "filePath": "auth/login.lazy.tsx"
     },
     "/auth/signup": {
-      "filePath": "auth/signup.tsx"
+      "filePath": "auth/signup.lazy.tsx"
     },
     "/blog/list": {
-      "filePath": "blog/list.tsx"
+      "filePath": "blog/list.lazy.tsx"
     },
     "/sample/$id/": {
       "filePath": "sample/$id/index.tsx"
     },
     "/sample/list/": {
-      "filePath": "sample/list/index.tsx"
+      "filePath": "sample/list/index.lazy.tsx"
     },
     "/blog/read/$slug/": {
       "filePath": "blog/read/$slug/index.tsx"

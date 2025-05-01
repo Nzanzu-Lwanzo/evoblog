@@ -28,36 +28,45 @@ export function useSubscribeToNewsletter() {
         loading,
         subscribeToNewsletter: async (event: FormEvent<HTMLFormElement>) => {
 
-            setLoading(true)
+            try {
 
-            event.preventDefault()
+                setLoading(true)
 
-            const data = getData(event.currentTarget)
-            const validationResult = subsciptionSchema.safeParse(data)
+                event.preventDefault()
 
-            if (validationResult.error) {
-                for (let error of validationResult.error.errors) {
-                    toast.warning(error.message)
+                const data = getData(event.currentTarget)
+                const validationResult = subsciptionSchema.safeParse(data)
+
+                if (validationResult.error) {
+
+                    for (let error of validationResult.error.errors) {
+                        toast.error(error.message)
+                    }
+
+                    setLoading(false)
+                    return
                 }
-                return
+
+                // Save to firebase
+                const saved = await saveASubscriber(data as CreateSubscriptionType)
+
+                if (!saved) {
+                    toast.error("Erreur, donnée non sauvegardée, réessayez !")
+                    return
+                }
+
+                // store in the local storage
+                saveToLocalStorage(LOCAL_STORAGE_KEYS.SUBSCRIPTION_DATA, saved)
+
+                // Success toast message
+                toast.success("Merci de vous être abonnés !")
+
+            } catch {
+                toast.error("Une erreur est survenue, réessayez !")
+            } finally {
+                // Reset the loading state
+                setLoading(false)
             }
-
-            // Save to firebase
-            const saved = await saveASubscriber(data as CreateSubscriptionType)
-
-            if (!saved) {
-                toast.error("Erreur, donnée non sauvegardée, réessayez !")
-                return
-            }
-
-            // store in the local storage
-            saveToLocalStorage(LOCAL_STORAGE_KEYS.SUBSCRIPTION_DATA, saved)
-
-            // Success toast message
-            toast.success("Merci de vous être abonnés !")
-
-            // Reste the loading state
-            setLoading(false)
 
         }
     }

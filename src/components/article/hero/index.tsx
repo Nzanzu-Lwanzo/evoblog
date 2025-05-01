@@ -12,7 +12,7 @@ const ArticleHero = () => {
             <p style={{ marginBottom: '2px' }}>Posté le 12.23.2025</p>
             <p>
               <span>par</span>{" "}
-              <a href='#' className={style.author__name}>Grace Kazingufu</a>
+              <span className={style.author__name}>Grace Kazingufu</span>
             </p>
           </div>
         </div>

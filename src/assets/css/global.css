@@ -64,8 +64,10 @@ article {
     h6 {
         font-weight: bold;
         margin-block: .5rem;
+        line-height: 1.5em;
     }
 
+    blockquote,
     p,
     li {
         font-size: .9rem;
@@ -75,7 +77,8 @@ article {
 
     ul,
     ol {
-        padding-left: 40px;
+        margin-left: 2rem;
+        margin-block: .5rem;
     }
 
     a {

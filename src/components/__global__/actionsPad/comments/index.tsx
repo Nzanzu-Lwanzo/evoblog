@@ -1,6 +1,6 @@
 import style from './style.module.css'
-import CommentCard from '../commentCard'
-import CommentForm from '../commentForm'
+import CommentCard from './commentCard'
+import CommentForm from './commentForm'
 
 const CommentsSection = () => {
   return (

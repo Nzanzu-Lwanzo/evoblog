@@ -1,8 +1,17 @@
 import style from './style.module.css'
 import Topbar from './Topbar'
-import { ActionsPadContextProvider, useActionsPadContext } from '../../../contexts/ActionsPadContext'
+import { ActionPadSection, ActionsPadContextProvider, useActionsPadContext } from '../../../contexts/ActionsPadContext'
 import CommentsSection from './comments'
 import ShowPadOnSm from './ShowPadOnSm'
+import React from 'react'
+import Likes from './likes'
+import Bookmarks from './bookmarks'
+
+const SECTIONS_MAP: Record<ActionPadSection, React.ReactNode> = {
+    "comments": <CommentsSection />,
+    "likes": <Likes />,
+    "bookmarks": <Bookmarks />
+}
 
 const ActionsPad = () => {
 
@@ -16,7 +25,7 @@ const ActionsPad = () => {
             ${ctx?.isPadVisible && style.active}
         `}>
                 <Topbar />
-                <CommentsSection />
+                {SECTIONS_MAP[ctx?.currentActionPadSection!]}
             </div>
             <ShowPadOnSm />
         </>

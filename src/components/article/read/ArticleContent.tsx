@@ -1,5 +1,5 @@
 import style from './style.module.css'
-import ActionsOnArticle from './ActionsOnArticle'
+import ActionsPad from '../../__global__/actionsPad'
 import { buildImage } from '../../../backend/client'
 import { PortableText } from '@portabletext/react'
 import { useReadPostContext } from '../../../contexts/ReadArticleContext'
@@ -19,7 +19,7 @@ const ArticleContent = () => {
 
             <PortableText value={ctx?.post.content || []} />
 
-            <ActionsOnArticle />
+            <ActionsPad />
         </article>
     )
 }

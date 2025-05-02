@@ -1,0 +1,67 @@
+/* COMMENT CARD */
+/* From Uiverse.io by zanina-yassine */
+
+.comment__container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
+}
+
+.comment__container .user {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 10px;
+}
+
+.comment__container .user .user__pic {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f1f1f1;
+    border-radius: 50%;
+}
+
+.comment__container .user .user__pic:after {
+    content: '';
+    width: 9px;
+    height: 9px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    border-radius: 50%;
+    background-color: #0fc45a;
+    border: 2px solid #ffffff;
+}
+
+.comment__container .user .user__info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 3px;
+}
+
+.comment__container .user .user__info .span {
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--text-color);
+}
+
+.comment__container .user .user__info .p {
+    font-weight: 600;
+    font-size: 10px;
+    color: #acaeb4;
+}
+
+.comment__container .comment__content {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+    color: var(--smooth-text);
+}

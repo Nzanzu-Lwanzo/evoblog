@@ -6,6 +6,7 @@
     padding-inline: 2rem;
     display: flex;
     flex-direction: column;
+    gap: 2rem;
     align-items: stretch;
     min-height: calc(100dvh - 140px);
     /* 140px = 70px of the header + 70px of the footer */

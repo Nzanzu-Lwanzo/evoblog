@@ -48,7 +48,7 @@ video {
 article {
     padding-block: 2rem;
 
-    &>* {
+    &>*:not(.exclude__padding) {
         display: block;
         padding-inline: 2rem;
     }

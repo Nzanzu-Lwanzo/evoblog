@@ -1,5 +1,5 @@
 import style from './style.module.css'
-import ActionsOnArticle from './ActionsOnArticle'
+import ActionsPad from '../../__global__/actionsPad'
 
 const ArticleContent = () => {
     return (
@@ -82,7 +82,7 @@ const ArticleContent = () => {
                 Django n’est pas directement impliqué dans les flux WebRTC, mais il en est le gardien. Signalisation, authentification, autorisation et distribution sécurisée des accès sont des éléments clés à mettre en place pour garantir la sécurité d’une application RTC moderne. Une approche rigoureuse combinant TLS, JWT, TURN sécurisé et contrôle d’accès est indispensable pour répondre aux enjeux actuels.
             </p>
 
-            <ActionsOnArticle />
+            <ActionsPad />
         </article>
     )
 }

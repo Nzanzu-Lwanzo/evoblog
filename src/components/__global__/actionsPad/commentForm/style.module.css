@@ -1,0 +1,76 @@
+.text__box {
+    width: 100%;
+    height: fit-content;
+    background-color: #f1f1f1;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.text__box .box-container {
+    background-color: #ffffff;
+    border-radius: 8px 8px 21px 21px;
+    padding: 8px;
+}
+
+.text__box .textarea {
+    width: 100%;
+    height: 250px;
+    resize: none;
+    border: 0;
+    border-radius: 6px;
+    padding: 12px 12px 10px 12px;
+    font-size: 13px;
+    outline: none;
+    caret-color: #000;
+    color: #000;
+}
+
+.text__box .formatting {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto 1fr;
+}
+
+.text__box .formatting .button {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 0;
+    outline: none;
+}
+
+.text__box .formatting .button:hover {
+    background-color: #f1f1f1;
+}
+
+.text__box .formatting .send {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--disabled);
+    margin: 0 0 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text__box .formatting .send:hover {
+    background-color: var(--accent);
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}

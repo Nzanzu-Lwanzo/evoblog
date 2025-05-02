@@ -1,0 +1,15 @@
+.list__comments {
+    width: 100%;
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2rem;
+}
+
+/* MEDIA QUERIES */
+@media only all and (max-width:1800px) {
+    .list__comments {
+        padding-inline: 1rem;
+    }
+}

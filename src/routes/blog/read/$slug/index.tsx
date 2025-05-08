@@ -1,10 +1,10 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, notFound } from '@tanstack/react-router'
 import ArticleHero from '../../../../components/article/hero'
 import ReadArticle from '../../../../components/article/read'
 import { getPost } from '../../../../backend/queries/post'
 import FullPageLoader from '../../../../components/__global__/fullPageLoader'
 import { ReadPostContextProvider } from '../../../../contexts/ReadArticleContext'
-import { Suspense } from 'react'
+import { useMatch } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/blog/read/$slug/')({
     component: RouteComponent,
@@ -15,12 +15,17 @@ export const Route = createFileRoute('/blog/read/$slug/')({
 
 function RouteComponent() {
 
-    const data = Route.useLoaderData()
+    const { loaderData, isFetching } = useMatch({
+        from: '/blog/read/$slug/'
+    })
 
-    return <ReadPostContextProvider post={data}>
-        <Suspense fallback={<FullPageLoader />}>
+    if (isFetching) return <FullPageLoader />
+    if (!loaderData) return notFound()
+
+    return (
+        <ReadPostContextProvider post={loaderData}>
             <ArticleHero />
             <ReadArticle />
-        </Suspense>
-    </ReadPostContextProvider>
+        </ReadPostContextProvider>
+    )
 }

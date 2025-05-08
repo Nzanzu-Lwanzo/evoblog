@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, notFound, useMatch } from '@tanstack/react-router'
 import SampleHero from '../../../components/sample/hero'
 import SampleContent from '../../../components/sample/content'
 import { getSample } from '../../../backend/queries/sample'
@@ -15,9 +15,14 @@ export const Route = createFileRoute('/sample/$id/')({
 
 function RouteComponent() {
 
-    const data = Route.useLoaderData()
+    const { loaderData, isFetching } = useMatch({
+        from: '/sample/$id/'
+    })
 
-    return <ViewSampleContextProvider sample={data}>
+    if (isFetching) return <FullPageLoader />
+    if (!loaderData) return notFound()
+
+    return <ViewSampleContextProvider sample={loaderData}>
         <Suspense fallback={<FullPageLoader />}>
             <SampleHero />
             <SampleContent />

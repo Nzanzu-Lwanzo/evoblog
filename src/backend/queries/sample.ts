@@ -42,6 +42,6 @@ export async function getSample(_id: string) {
 
     `)
 
-    return sample[0] as Sample
+    return sample[0] as Sample | undefined
 
 }

@@ -55,5 +55,5 @@ export const getPost = async (slug: string) => {
         { slug }
     )
 
-    return post
+    return post as Post | undefined
 }

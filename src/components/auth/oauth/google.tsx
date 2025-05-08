@@ -1,21 +1,12 @@
-import { signInWithPopup } from 'firebase/auth'
 import style from './style.module.css'
-import { auth, googleProvider } from '../../../firebase/config'
-import { getUserFromAuthResult } from '../../../lib/helpers'
-import { saveToLocalStorage } from '../../../lib/storage'
-import { LOCAL_STORAGE_KEYS } from '../../../lib/enums'
-import { useNavigate } from '@tanstack/react-router'
+import { googleProvider } from '../../../firebase/config'
+import { useOAuth } from '../../../lib/hooks/authentication'
 
 const GoogleButton = () => {
 
-    const navigateTo = useNavigate()
+    const { authenticate } = useOAuth()
 
-    const handleAuthentication = async () => {
-        const account = await signInWithPopup(auth, googleProvider)
-        const user = getUserFromAuthResult(account.user)
-        saveToLocalStorage(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER, user)
-        navigateTo({ to: "/" })
-    }
+    const handleAuthentication = () => authenticate(googleProvider)
 
     return (
         <>

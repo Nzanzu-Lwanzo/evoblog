@@ -5,6 +5,8 @@ import {
     createUserWithEmailAndPassword,
     updateProfile,
     signInWithEmailAndPassword,
+    signInWithPopup,
+    type AuthProvider
 } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { AuthenticatedUser, CreateAccountType, LoginType } from "../@types";
@@ -99,12 +101,20 @@ export function useAuthenticate(label: "signup" | "login") {
     }
 }
 
-export function useGoogleAuth() {
+export function useOAuth() {
 
+    const navigateTo = useNavigate()
 
     return {
-        authenticate: () => {
-
+        authenticate: async (provider: AuthProvider) => {
+            try {
+                const account = await signInWithPopup(auth, provider)
+                const user = getUserFromAuthResult(account.user)
+                saveToLocalStorage(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER, user)
+                navigateTo({ to: "/" })
+            } catch {
+                toast.error("Échec, vous êtiez probablement déjà connecté.")
+            }
         }
     }
 

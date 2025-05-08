@@ -2,11 +2,11 @@ import style from './style.module.css'
 import { useRouter } from '@tanstack/react-router'
 import { MoveRight } from 'lucide-react'
 import { PropsWithChildren } from 'react';
+import { BLOG_OWNER_DATA } from '../../../lib/enums';
 
 interface ParentErrorComponentProps {
   title: string;
 }
-
 
 const ParentErrorComponent = ({ title, children }: PropsWithChildren<ParentErrorComponentProps>) => {
 
@@ -35,4 +35,7 @@ const ParentErrorComponent = ({ title, children }: PropsWithChildren<ParentError
   )
 }
 
+export const mailTo = (subject: string) => {
+  return `mailto:${BLOG_OWNER_DATA.EMAIL}?subject=${subject}&body=Salut ! Je suis [votre nom], ...`
+}
 export default ParentErrorComponent

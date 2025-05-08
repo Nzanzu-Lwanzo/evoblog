@@ -7,8 +7,9 @@ export interface CreateAccountType {
 
 export type LoginType = Omit<CreateAccountType, 'confirmPassword' | 'name'>
 
-export interface AuthenticatedUser {
+export interface AuthenticatedUserType {
     id: string
     name: string | null
     email: string | null
+    picture: string | null
 }

@@ -6,11 +6,12 @@ import {
     updateProfile,
     signInWithEmailAndPassword,
     signInWithPopup,
+    signOut,
     type AuthProvider
 } from "firebase/auth";
 import { auth } from "../../firebase/config";
-import { AuthenticatedUser, CreateAccountType, LoginType } from "../@types";
-import { saveToLocalStorage } from "../storage";
+import { AuthenticatedUserType, CreateAccountType, LoginType } from "../@types";
+import { removeFromLocalStorage, saveToLocalStorage } from "../storage";
 import { LOCAL_STORAGE_KEYS } from "../enums";
 import { useNavigate } from "@tanstack/react-router";
 import { getUserFromAuthResult } from "../helpers";
@@ -41,7 +42,7 @@ export function useAuthenticate(label: "signup" | "login") {
                     return
                 }
 
-                let user: AuthenticatedUser | undefined = undefined
+                let user: AuthenticatedUserType | undefined = undefined
 
                 switch (label) {
                     case "signup": {
@@ -116,6 +117,28 @@ export function useOAuth() {
                 toast.error("Échec, vous êtiez probablement déjà connecté.")
             }
         }
+    }
+
+}
+
+export function useLogOut() {
+
+    const navigateTo = useNavigate()
+    const [loading, setLoading] = useState(false)
+
+    return {
+        logout: () => {
+            setLoading(true)
+            signOut(auth)
+                .then(() => {
+                    removeFromLocalStorage(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER)
+                    toast.success("Vous êtes déconnecté !")
+                    navigateTo({ to: "/" })
+                })
+                .catch(() => toast.error("Échec de la déconnexion !"))
+                .finally(() => setLoading(false))
+        },
+        loggingOut: loading
     }
 
 }

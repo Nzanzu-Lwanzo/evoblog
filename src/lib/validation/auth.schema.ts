@@ -10,7 +10,6 @@ const nameSchema = z
     .min(3, "Le nom doit contenir au moins 3 caractères.")
     .max(20, "Le nom doit contenir au maximum 20 caractères.")
     .regex(/^[a-zA-Z0-9]+$/, "Le nom ne doit contenir que des lettres et des chiffres.")
-    .refine((name) => !name.includes(" "), "Le nom ne doit pas contenir d'espaces.")
 
 const emailSchema = z
     .string()

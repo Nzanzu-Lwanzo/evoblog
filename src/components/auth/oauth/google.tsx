@@ -1,10 +1,26 @@
+import { signInWithPopup } from 'firebase/auth'
 import style from './style.module.css'
+import { auth, googleProvider } from '../../../firebase/config'
+import { getUserFromAuthResult } from '../../../lib/helpers'
+import { saveToLocalStorage } from '../../../lib/storage'
+import { LOCAL_STORAGE_KEYS } from '../../../lib/enums'
+import { useNavigate } from '@tanstack/react-router'
 
 const GoogleButton = () => {
+
+    const navigateTo = useNavigate()
+
+    const handleAuthentication = async () => {
+        const account = await signInWithPopup(auth, googleProvider)
+        const user = getUserFromAuthResult(account.user)
+        saveToLocalStorage(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER, user)
+        navigateTo({ to: "/" })
+    }
+
     return (
         <>
             {/* From Uiverse.io by Yaya12085 */}
-            <button className={style.button}>
+            <button type='button' className={style.button} onClick={handleAuthentication}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     preserveAspectRatio="xMidYMid"

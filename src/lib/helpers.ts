@@ -1,3 +1,5 @@
+import { type User } from "firebase/auth";
+
 export function getYouTubeVideoThumbnail(videoId: string, quality = 'hqdefault') {
     return `https://img.youtube.com/vi/${videoId}/${quality}.jpg`;
 }
@@ -23,4 +25,11 @@ export function fromEmailGetName(email: string) {
 
 }
 
-console.log(fromEmailGetName("nzanzu.lwanzo.work@gmail.com"))
+export function getUserFromAuthResult(user: User) {
+    return {
+        id: user.uid,
+        name: user.displayName,
+        email: user.email,
+        picture: user.photoURL
+    }
+}

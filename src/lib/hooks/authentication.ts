@@ -1,12 +1,17 @@
 import { FormEvent, useState } from "react";
 import { toast } from "react-fox-toast";
 import { createAccountSchema, logInSchema } from "../validation/auth.schema";
-import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
+import {
+    createUserWithEmailAndPassword,
+    updateProfile,
+    signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { AuthenticatedUser, CreateAccountType, LoginType } from "../@types";
 import { saveToLocalStorage } from "../storage";
 import { LOCAL_STORAGE_KEYS } from "../enums";
 import { useNavigate } from "@tanstack/react-router";
+import { getUserFromAuthResult } from "../helpers";
 
 export function useAuthenticate(label: "signup" | "login") {
 
@@ -49,11 +54,7 @@ export function useAuthenticate(label: "signup" | "login") {
                             photoURL: account.user.photoURL,
                         })
 
-                        user = {
-                            id: account.user.uid,
-                            name: account.user.displayName,
-                            email: account.user.email
-                        }
+                        user = getUserFromAuthResult(account.user)
 
                         break
                     }
@@ -64,11 +65,7 @@ export function useAuthenticate(label: "signup" | "login") {
 
                         const account = await signInWithEmailAndPassword(auth, data.email, data.password)
 
-                        user = {
-                            id: account.user.uid,
-                            name: account.user.displayName,
-                            email: account.user.email
-                        }
+                        user = getUserFromAuthResult(account.user)
 
                         break
                     }
@@ -91,7 +88,7 @@ export function useAuthenticate(label: "signup" | "login") {
 
                 if (error.message.includes("invalid-credential")) {
                     toast.error("Mot de passe ou email invalide !")
-                    return 
+                    return
                 }
 
                 toast.error(error.message)
@@ -100,4 +97,15 @@ export function useAuthenticate(label: "signup" | "login") {
         },
         loading
     }
+}
+
+export function useGoogleAuth() {
+
+
+    return {
+        authenticate: () => {
+
+        }
+    }
+
 }

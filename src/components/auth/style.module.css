@@ -6,7 +6,7 @@
     max-width: 500px;
     background-color: var(--white);
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 5px;
     position: relative;
 }
 
@@ -120,6 +120,15 @@
     font-size: 16px;
     transform: .3s ease;
     cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    justify-content: center;
+
+    &:disabled {
+        background-color: var(--disabled);
+    }
 }
 
 .submit:hover {

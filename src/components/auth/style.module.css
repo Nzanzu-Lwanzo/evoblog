@@ -120,6 +120,15 @@
     font-size: 16px;
     transform: .3s ease;
     cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    justify-content: center;
+
+    &:disabled {
+        background-color: var(--disabled);
+    }
 }
 
 .submit:hover {

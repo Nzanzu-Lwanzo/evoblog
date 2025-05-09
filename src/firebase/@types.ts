@@ -2,7 +2,6 @@ export interface SubscriberType {
     id: string;
     contact: string;
     isEmail: boolean;
-    name: string | undefined
     subscribedAt: string
 }
 

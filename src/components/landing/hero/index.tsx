@@ -46,7 +46,8 @@ const LandingHero = () => {
     <section className={`center ${style.section}`} ref={sectionRef}>
       <div className={style.content}>
         <h1 className={style.big_title}>
-          Salut {subscrptionData?.name && (<span className={style.user__name}>{subscrptionData?.name}</span>)} ! Je suis <span className={style.user__name}>Victor Nzanzu</span>, développeur web et romancier basé en République démocratique du Congo. J'aime partager ce que je connais, ce que j'aime et ce que je pense. {!subscrptionData?.contact && "Intéressés ? Abonnez-vous à ma newsletter."}
+          Salut ! Je suis <span className={style.user__name}>Victor Nzanzu</span>,
+          développeur web et romancier basé en République démocratique du Congo. J'aime partager ce que je connais, ce que j'aime et ce que je pense. {!subscrptionData?.contact && "Intéressés ? Abonnez-vous à ma newsletter."}
         </h1>
         <form className={style.newsletter__form} onSubmit={subscribeToNewsletter}>
           <div className={style.input__container}>

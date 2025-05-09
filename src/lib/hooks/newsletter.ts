@@ -5,7 +5,9 @@ import { CreateSubscriptionType } from "../../firebase/@types";
 import { toast } from "react-fox-toast";
 import { saveToLocalStorage } from "../storage";
 import { LOCAL_STORAGE_KEYS } from "../enums";
-import { fromEmailGetName, isValidEmail } from "../helpers";
+import { isValidEmail } from "../helpers";
+import { FirebaseError } from "firebase/app";
+import { useNavigate } from "@tanstack/react-router";
 
 const getData = (form: HTMLFormElement) => {
     const formData = new FormData(form);
@@ -13,8 +15,7 @@ const getData = (form: HTMLFormElement) => {
     let contact = formData.get('contact') as string
     const data = {
         contact: contact,
-        isEmail: isValidEmail(contact),
-        name: fromEmailGetName(contact)
+        isEmail: isValidEmail(contact)
     }
 
     return data as unknown
@@ -23,6 +24,7 @@ const getData = (form: HTMLFormElement) => {
 export function useSubscribeToNewsletter() {
 
     const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
 
     return {
         loading,
@@ -40,7 +42,7 @@ export function useSubscribeToNewsletter() {
                 if (validationResult.error) {
 
                     for (let error of validationResult.error.errors) {
-                        toast.error(error.message)
+                        toast.warning(error.message)
                     }
 
                     setLoading(false)
@@ -61,8 +63,17 @@ export function useSubscribeToNewsletter() {
                 // Success toast message
                 toast.success("Merci de vous être abonnés !")
 
-            } catch {
+            } catch (e) {
+
+                const error = e as Error | FirebaseError
+
+                if (error.message.includes("USER_NOT_AUTHENTICATED")) {
+                    toast.info("Vous devez être connecté pour vous abonner à la newsletter !")
+                    return navigate({ to: "/auth/login" })
+                }
+
                 toast.error("Une erreur est survenue, réessayez !")
+
             } finally {
                 // Reset the loading state
                 setLoading(false)

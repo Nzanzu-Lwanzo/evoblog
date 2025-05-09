@@ -1,25 +1,25 @@
-import { CreateSubscriptionType } from "../@types";
+import { AuthenticatedUserType } from "../../lib/@types";
+import { LOCAL_STORAGE_KEYS } from "../../lib/enums";
+import { getFromLocalStorage } from "../../lib/storage";
+import { CreateSubscriptionType, SubscriberType } from "../@types";
 import { db } from "../config";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { serverTimestamp, setDoc, doc } from "firebase/firestore";
 
-const subscribersCollection = collection(db, 'subscribers')
+export async function saveASubscriber(data: CreateSubscriptionType): Promise<SubscriberType> {
 
-export async function saveASubscriber(data: CreateSubscriptionType) {
+    const user = getFromLocalStorage<AuthenticatedUserType>(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER)
 
-    try {
-
-        let subscribedAt = serverTimestamp()
-        const subscription = await addDoc(subscribersCollection, { ...data, subscribedAt });
-
-        return {
-            ...data,
-            id: subscription.id,
-            subscribedAt,
-        }
-
-    } catch (e) {
-        console.log(e)
-        return
+    if (!user) {
+        throw new Error("USER_NOT_AUTHENTICATED")
     }
 
+    let subscribedAt = serverTimestamp()
+    await setDoc(doc(db, "subscribers", user.id), { ...data, subscribedAt })
+
+    return {
+        id: user.id,
+        contact: data.contact,
+        isEmail: data.isEmail,
+        subscribedAt: new Date().toString() //Should change this value,
+    }
 }

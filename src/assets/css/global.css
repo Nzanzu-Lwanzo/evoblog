@@ -156,6 +156,12 @@ article {
     border-top: 2px solid var(--accent);
 }
 
+/* TOAST MESSAGES */
+
+.go444956636 {
+    font-size: .8rem;
+}
+
 @-webkit-keyframes spin {
     0% {
         -webkit-transform: rotate(0deg);

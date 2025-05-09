@@ -6,7 +6,6 @@ import OAuthButtons from '../oauth/_buttons'
 import NameInput from '../inputs/Name'
 import EmailInput from '../inputs/Email'
 import PasswordInput from '../inputs/Password'
-import ConfirmPasswordInput from '../inputs/ConfirmPassword'
 
 const SignUpForm = () => {
 
@@ -22,7 +21,6 @@ const SignUpForm = () => {
                 <NameInput />
                 <EmailInput />
                 <PasswordInput />
-                <ConfirmPasswordInput />
 
                 <button className={style.submit} disabled={loading}>
                     {loading ? <Loader height={20} width={20} /> : <span>Soumettre</span>}

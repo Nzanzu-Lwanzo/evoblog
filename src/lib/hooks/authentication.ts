@@ -15,6 +15,7 @@ import { removeFromLocalStorage, saveToLocalStorage } from "../storage";
 import { LOCAL_STORAGE_KEYS } from "../enums";
 import { useNavigate } from "@tanstack/react-router";
 import { getUserFromAuthResult } from "../helpers";
+import { FirebaseError } from "firebase/app";
 
 export function useAuthenticate(label: "signup" | "login") {
 
@@ -35,7 +36,6 @@ export function useAuthenticate(label: "signup" | "login") {
                 // Validate the submitted data
                 const result = schema.safeParse(data)
                 if (!result.success) {
-                    console.log(result.error.errors)
                     for (let error of result.error.errors) {
                         toast.info(error.message)
                     }
@@ -104,7 +104,7 @@ export function useAuthenticate(label: "signup" | "login") {
 
 export function useOAuth() {
 
-    const navigateTo = useNavigate()
+    const navigate = useNavigate()
 
     return {
         authenticate: async (provider: AuthProvider) => {
@@ -112,9 +112,26 @@ export function useOAuth() {
                 const account = await signInWithPopup(auth, provider)
                 const user = getUserFromAuthResult(account.user)
                 saveToLocalStorage(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER, user)
-                navigateTo({ to: "/" })
-            } catch {
-                toast.error("Échec, vous êtiez probablement déjà connecté.")
+                navigate({ to: "/" })
+            } catch (e) {
+                const error = e as FirebaseError
+
+                if (error.message.includes("auth/popup-closed-by-user")) {
+                    toast.error("Échec, la fenêtre a été fermée de manière innattendue.")
+                    return
+                }
+
+                /*
+                    Si l'utilisateur se connecte avec Google, et qu'ensuite il essaie de se connecter
+                    un compte Github ayant la même adresse email, il aura une erreur. En fait, ce n'est 
+                    pas vraiment une erreur, mais un message d'erreur de Firebase. Il faut juste
+                    lui dire que son compte a été connecté.
+                */
+                if (error.message.includes("auth/account-exists-with-different-credential")) {
+                    toast.success("Votre compte a été connecté !")
+                    navigate({ to: "/" })
+                    return
+                }
             }
         }
     }
@@ -123,7 +140,7 @@ export function useOAuth() {
 
 export function useLogOut() {
 
-    const navigateTo = useNavigate()
+    const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
 
     return {
@@ -133,7 +150,7 @@ export function useLogOut() {
                 .then(() => {
                     removeFromLocalStorage(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER)
                     toast.success("Vous êtes déconnecté !")
-                    navigateTo({ to: "/" })
+                    navigate({ to: "/" })
                 })
                 .catch(() => toast.error("Échec de la déconnexion !"))
                 .finally(() => setLoading(false))

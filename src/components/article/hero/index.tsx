@@ -18,7 +18,7 @@ const ArticleHero = () => {
             <p style={{ marginBottom: '2px' }}>Posté le {formatDateTime(ctx?.post._updatedAt!)}</p>
             <p>
               <span>par</span>{" "}
-              <span className={style.author__name}>Grace Kazingufu</span>
+              <span className={style.author__name}>{ctx?.post.author.name}</span>
             </p>
           </div>
         </div>

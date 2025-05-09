@@ -16,7 +16,7 @@ const CommentForm = ({ showForm, callback }: CommentFormPropsType) => {
     return (
         <div className={`${style.text__box} ${showForm && style.show__on__mobile}`}>
             <form className={style.box__container} onSubmit={postComment}>
-                <textarea placeholder="Reply" name='content' className={style.textarea} />
+                <textarea placeholder="Commenter (markdown supporté)" name='content' className={style.textarea} />
                 <div>
                     <div className={style.formatting}>
                         <button type="button" className={style.button}>
@@ -168,6 +168,8 @@ const CommentForm = ({ showForm, callback }: CommentFormPropsType) => {
                                 />
                             </svg>
                         </button>
+
+
                         <button type="submit" className={style.send} title="Send">
                             {saving || addingCommentToPost ? <Loader height={17} width={17} /> : (
                                 <svg

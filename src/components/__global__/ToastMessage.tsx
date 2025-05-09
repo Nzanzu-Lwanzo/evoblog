@@ -15,7 +15,7 @@ const ToastMessage = () => {
                 custom: { style, className: '' },
             }}
             position="bottom-left"
-            duration={2000000}
+            duration={5000}
         />
     )
 }

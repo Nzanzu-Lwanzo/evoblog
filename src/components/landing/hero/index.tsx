@@ -47,7 +47,7 @@ const LandingHero = () => {
           Salut ! Je suis <span className={style.user__name}>Victor Nzanzu</span>,
           développeur web et romancier basé en République démocratique du Congo.
           J'aime partager ce que je connais, ce que j'aime et ce que je pense.
-          {!appCtx?.subscriptionData?.contact && "Intéressés ? Abonnez-vous à ma newsletter."}
+          {appCtx?.subscriptionData ? " Merci de vous être abonné(e) à ma newsletter !" : " Intéressé(e) ? Abonnez-vous à ma newsletter."}
         </h1>
         <form className={style.newsletter__form} onSubmit={subscribeToNewsletter}>
           <div className={style.input__container}>

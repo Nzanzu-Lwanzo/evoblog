@@ -1,6 +1,6 @@
 import style from './style.module.css'
 import CommentCard from './commentCard'
-import CommentForm from './commentForm'
+import FormAndCallerBtn from './FormAndCallerBtn'
 
 const CommentsSection = () => {
   return (
@@ -8,7 +8,7 @@ const CommentsSection = () => {
       <CommentCard />
       <CommentCard />
       <CommentCard />
-      <CommentForm />
+      <FormAndCallerBtn />
     </div>
   )
 }

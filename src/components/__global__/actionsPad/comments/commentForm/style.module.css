@@ -6,7 +6,7 @@
     border-radius: 4px;
 }
 
-.text__box .box-container {
+.text__box .box__container {
     background-color: #ffffff;
     border-radius: 8px 8px 21px 21px;
     padding: 8px;
@@ -14,8 +14,8 @@
 
 .text__box .textarea {
     width: 100%;
-    height: 250px;
     resize: none;
+    height: 130px;
     border: 0;
     border-radius: 6px;
     padding: 12px 12px 10px 12px;
@@ -57,6 +57,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .text__box .formatting .send:hover {
@@ -72,5 +73,25 @@
     100% {
         transform: scale(1);
         opacity: 0;
+    }
+}
+
+/* MEDIA QUERIES */
+@media only all and (max-width:500px) {
+
+    /* This is the breakpoint where the actionsPad is put in position fixed */
+    .text__box {
+        position: absolute;
+        bottom: 1rem;
+        left: 0;
+        right: 0;
+        transform: translateY(calc(100% + 1rem));
+        transition: .3s ease-in;
+        width: 96%;
+        margin: auto;
+    }
+
+    .text__box.show__on__mobile {
+        transform: none;
     }
 }

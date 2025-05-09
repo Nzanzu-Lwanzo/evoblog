@@ -1,11 +1,10 @@
 import style from './style.module.css'
 
-const CommentForm = () => {
+const CommentForm = ({ showForm }: { showForm: boolean }) => {
     return (
-        <div className={style.text__box}>
+        <div className={`${style.text__box} ${showForm && style.show__on__mobile}`}>
             <div className={style.box__container}>
                 <textarea placeholder="Reply" defaultValue={""} className={style.textarea} />
-                {/* <div contentEditable className={style.textarea}></div> */}
                 <div>
                     <div className={style.formatting}>
                         <button type="button" className={style.button}>

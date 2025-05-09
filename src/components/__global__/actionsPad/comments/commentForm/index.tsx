@@ -1,15 +1,17 @@
-import { usePostComment } from '../../../../../lib/hooks/comments'
 import style from './style.module.css'
+import { usePostComment } from '../../../../../lib/hooks/comments'
 import { useReadPostContext } from '../../../../../contexts/ReadArticleContext'
 import Loader from '../../../Loader'
 
-const CommentForm = () => {
+
+const CommentForm = ({ showForm }: { showForm: boolean }) => {
+
 
     const ctx = useReadPostContext()
     const { postComment, saving, addingCommentToPost } = usePostComment(ctx?.post._id)
 
     return (
-        <div className={style.text__box}>
+        <div className={`${style.text__box} ${showForm && style.show__on__mobile}`}>
             <form className={style.box__container} onSubmit={postComment}>
                 <textarea placeholder="Reply" name='content' className={style.textarea} />
                 <div>

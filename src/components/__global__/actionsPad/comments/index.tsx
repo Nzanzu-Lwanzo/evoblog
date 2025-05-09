@@ -1,6 +1,6 @@
 import style from './style.module.css'
 import CommentCard from './commentCard'
-import CommentForm from './commentForm'
+import FormAndCallerBtn from './FormAndCallerBtn'
 import { useReadPostContext } from '../../../../contexts/ReadArticleContext'
 
 const CommentsSection = () => {
@@ -23,7 +23,7 @@ const CommentsSection = () => {
           }
         </>
       )}
-      <CommentForm />
+      <FormAndCallerBtn />
     </div>
   )
 }

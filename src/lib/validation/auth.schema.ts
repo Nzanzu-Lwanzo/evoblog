@@ -18,13 +18,8 @@ const emailSchema = z
 export const createAccountSchema = z.object({
     name: nameSchema,
     email: emailSchema,
-    password: passwordSchema,
-    confirmPassword: passwordSchema
+    password: passwordSchema
 })
-    .refine((data) => data.password === data.confirmPassword, {
-        message: "Les mots de passe ne correspondent pas.",
-        path: ["confirmPassword"]
-    })
     .refine((data) => data.password !== data.name, {
         message: "Le mot de passe ne doit pas être le même que le nom.",
         path: ["password"]

@@ -7,7 +7,7 @@ import { toast } from "react-fox-toast";
 import { useReadPostContext } from "../../contexts/ReadArticleContext";
 
 
-export function usePostComment(postId: string | undefined) {
+export function usePostComment(postId: string | undefined, callback: () => void) {
 
     const ctx = useReadPostContext()
     const authUser = getFromLocalStorage<AuthenticatedUserType>(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER)
@@ -45,6 +45,7 @@ export function usePostComment(postId: string | undefined) {
                 })
 
                 form.reset()
+                callback()
 
             } catch (e) {
                 toast.warning("Une petite erreur est survenue !")

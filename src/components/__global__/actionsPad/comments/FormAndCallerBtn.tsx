@@ -9,7 +9,7 @@ const FormAndCallerBtn = () => {
 
     return (
         <>
-            <CommentForm showForm={showForm} />
+            <CommentForm showForm={showForm} callback={() => setShowForm(false)} />
             <button
                 type="button"
                 className={`

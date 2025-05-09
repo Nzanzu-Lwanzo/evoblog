@@ -3,12 +3,15 @@ import { usePostComment } from '../../../../../lib/hooks/comments'
 import { useReadPostContext } from '../../../../../contexts/ReadArticleContext'
 import Loader from '../../../Loader'
 
+interface CommentFormPropsType {
+    showForm: boolean
+    callback: () => void
+}
 
-const CommentForm = ({ showForm }: { showForm: boolean }) => {
-
+const CommentForm = ({ showForm, callback }: CommentFormPropsType) => {
 
     const ctx = useReadPostContext()
-    const { postComment, saving, addingCommentToPost } = usePostComment(ctx?.post._id)
+    const { postComment, saving, addingCommentToPost } = usePostComment(ctx?.post._id, callback)
 
     return (
         <div className={`${style.text__box} ${showForm && style.show__on__mobile}`}>

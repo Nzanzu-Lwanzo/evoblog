@@ -1,0 +1,40 @@
+.logout__pad {
+    padding: 1rem;
+    margin: auto;
+
+    &>* {
+        margin-block: .5rem;
+    }
+}
+
+.title {
+    font-size: 1.5rem;
+    line-height: 2rem;
+
+    &,
+    * {
+        font-weight: bold;
+    }
+
+    .username {
+        color: var(--accent);
+    }
+}
+
+.text {
+    font-size: .8rem;
+    line-height: 1.2rem;
+}
+
+.logout__button {
+    padding: .5rem 1rem;
+    border-radius: 4px;
+    background-color: var(--disabled);
+    color: #FFF;
+    transition: .3s ease-out;
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--accent);
+    }
+}

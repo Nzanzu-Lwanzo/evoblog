@@ -1,3 +1,5 @@
+import { type User } from "firebase/auth";
+
 import { Author } from "./@type";
 
 export function getYouTubeVideoThumbnail(videoId: string, quality = 'hqdefault') {
@@ -23,6 +25,15 @@ export function fromEmailGetName(email: string) {
         .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // capitalize each word
         .join(' ');
 
+}
+
+export function getUserFromAuthResult(user: User) {
+    return {
+        id: user.uid,
+        name: user.displayName,
+        email: user.email,
+        picture: user.photoURL
+    }
 }
 
 export function formatDateTime(dateInput: string) {

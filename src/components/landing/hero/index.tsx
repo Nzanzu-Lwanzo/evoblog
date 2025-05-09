@@ -1,23 +1,21 @@
 import style from './style.module.css'
-import { MoveRight } from 'lucide-react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { useRef } from 'react'
-import Loader from '../../__global__/Loader'
 import { useSubscribeToNewsletter } from '../../../lib/hooks/newsletter'
-import { getFromLocalStorage } from '../../../lib/storage'
-import { LOCAL_STORAGE_KEYS } from '../../../lib/enums'
-import { SubscriberType } from '../../../firebase/@types'
+import { useAppContext } from '../../../contexts/AppContext'
+import SubscribeBtn from './SubscribeBtn'
+import UnsubscribeBtn from './UnsubscribeBtn'
 
 gsap.registerPlugin(useGSAP)
 
 const LandingHero = () => {
 
+  const appCtx = useAppContext()
   const { subscribeToNewsletter, loading } = useSubscribeToNewsletter()
   const sectionRef = useRef<HTMLElement | null>(null);
   const buttonContainerRef = useRef<HTMLButtonElement | null>(null)
-  const subscrptionData = getFromLocalStorage<SubscriberType>(LOCAL_STORAGE_KEYS.SUBSCRIPTION_DATA)
-  const isSubscribed = !!subscrptionData?.contact
+  const isSubscribed = !!appCtx?.subscriptionData?.contact
 
   useGSAP(() => {
     gsap.from(`.${style.content}`, {
@@ -46,7 +44,10 @@ const LandingHero = () => {
     <section className={`center ${style.section}`} ref={sectionRef}>
       <div className={style.content}>
         <h1 className={style.big_title}>
-          Salut {subscrptionData?.name && (<span className={style.user__name}>{subscrptionData?.name}</span>)} ! Je suis <span className={style.user__name}>Victor Nzanzu</span>, développeur web et romancier basé en République démocratique du Congo. J'aime partager ce que je connais, ce que j'aime et ce que je pense. {!subscrptionData?.contact && "Intéressés ? Abonnez-vous à ma newsletter."}
+          Salut ! Je suis <span className={style.user__name}>Victor Nzanzu</span>,
+          développeur web et romancier basé en République démocratique du Congo.
+          J'aime partager ce que je connais, ce que j'aime et ce que je pense.
+          {appCtx?.subscriptionData ? " Merci de vous être abonné(e) à ma newsletter !" : " Intéressé(e) ? Abonnez-vous à ma newsletter."}
         </h1>
         <form className={style.newsletter__form} onSubmit={subscribeToNewsletter}>
           <div className={style.input__container}>
@@ -58,21 +59,11 @@ const LandingHero = () => {
               placeholder='tupac@gmail.com ou 0998855666'
               className={style.input}
               disabled={loading || isSubscribed}
-              defaultValue={subscrptionData?.contact}
+              value={appCtx?.subscriptionData?.contact}
             />
           </div>
           <span ref={buttonContainerRef}>
-            <button
-              type="submit"
-              className={style.button}
-              disabled={loading || isSubscribed}>
-              <span>
-                {isSubscribed ? 'Abonné' : "S'abonner"}
-              </span>
-              <span className={`center ${style.icon}`}>
-                {loading ? <Loader /> : <MoveRight size={20} />}
-              </span>
-            </button>
+            {isSubscribed ? <UnsubscribeBtn /> : <SubscribeBtn />}
           </span>
         </form>
       </div>

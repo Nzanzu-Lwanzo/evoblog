@@ -1,6 +1,7 @@
 export enum LOCAL_STORAGE_KEYS {
     THEME = 'theme',
-    SUBSCRIPTION_DATA = "subscr"
+    SUBSCRIPTION_DATA = "subscr",
+    AUTHENTICATED_USER = "user"
 }
 
 export enum BLOG_OWNER_DATA {

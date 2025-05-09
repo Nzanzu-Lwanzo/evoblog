@@ -1,16 +1,16 @@
 import { FormEvent, useState } from "react";
 import subsciptionSchema from "../validation/subscription.schema";
-import { saveASubscriber } from "../../firebase/queries/subscribers.queries";
-import { CreateSubscriptionType, SubscriberType } from "../../firebase/@types";
+import { saveASubscriber } from "../../firebase/queries/users.queries";
 import { toast } from "react-fox-toast";
-import { getFromLocalStorage, removeFromLocalStorage, saveToLocalStorage } from "../storage";
+import { getFromLocalStorage, saveToLocalStorage } from "../storage";
 import { LOCAL_STORAGE_KEYS } from "../enums";
 import { isValidEmail } from "../helpers";
 import { FirebaseError } from "firebase/app";
 import { useNavigate } from "@tanstack/react-router";
-import { deleteDoc, doc } from "firebase/firestore";
+import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useAppContext } from "../../contexts/AppContext";
+import { AuthenticatedUserType } from "../@type";
 
 const getData = (form: HTMLFormElement) => {
     const formData = new FormData(form);
@@ -21,7 +21,7 @@ const getData = (form: HTMLFormElement) => {
         isEmail: isValidEmail(contact)
     }
 
-    return data as unknown
+    return data
 }
 
 export function useSubscribeToNewsletter() {
@@ -52,8 +52,14 @@ export function useSubscribeToNewsletter() {
                     return
                 }
 
+                // Update user data
+                const userData =
+                    data.isEmail ?
+                        { email: data.contact, phoneNumber: appCtx?.authUser?.email ?? null } :
+                        { phoneNumber: data.contact, email: appCtx?.authUser?.email ?? null }
+
                 // Save to firebase
-                const saved = await saveASubscriber(data as CreateSubscriptionType)
+                const saved = await saveASubscriber(appCtx?.authUser?.id, userData)
 
                 if (!saved) {
                     toast.error("Erreur, donnée non sauvegardée, réessayez !")
@@ -61,8 +67,11 @@ export function useSubscribeToNewsletter() {
                 }
 
                 // store in the local storage & state
-                saveToLocalStorage(LOCAL_STORAGE_KEYS.SUBSCRIPTION_DATA, saved)
-                appCtx?.setSubscriptionData(saved)
+                saveToLocalStorage(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER, { ...appCtx?.authUser, newsletter: true })
+                appCtx?.setAuthUser((prev) => {
+                    if (!prev) return null
+                    return { ...prev, newsletter: true }
+                })
 
                 // Success toast message
                 toast.success("Vous avez été abonné à la newsletter avec succès !")
@@ -91,7 +100,7 @@ export function useSubscribeToNewsletter() {
 export function useUnsubscribeFromNewsletter() {
 
     const appCtx = useAppContext()
-    const subscribedUser = getFromLocalStorage<SubscriberType>(LOCAL_STORAGE_KEYS.SUBSCRIPTION_DATA)
+    const autheUser = getFromLocalStorage<AuthenticatedUserType>(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER)
     const [loading, setLoading] = useState(false)
 
     return {
@@ -100,16 +109,26 @@ export function useUnsubscribeFromNewsletter() {
             setLoading(true)
 
             try {
-                if (!subscribedUser) {
+                if (!autheUser) {
                     toast.info("Aucune souscription trouvée !")
                     return
                 }
 
-                const docRef = doc(db, "subscribers", subscribedUser.id)
+                const docRef = doc(db, "users", autheUser.id)
 
-                deleteDoc(docRef).then(() => {
-                    appCtx?.setSubscriptionData(null)
-                    removeFromLocalStorage(LOCAL_STORAGE_KEYS.SUBSCRIPTION_DATA)
+                updateDoc(docRef, { newsletter: false }).then(() => {
+
+                    appCtx?.setAuthUser((_user) => {
+
+                        if (!_user) return null
+
+                        return {
+                            ..._user,
+                            newsletter: false
+                        }
+                    })
+
+                    saveToLocalStorage(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER, { ...autheUser, newsletter: false })
                 })
 
                 toast.success("Vous vous êtes désabonné avec succès !")

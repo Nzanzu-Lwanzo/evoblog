@@ -16,6 +16,8 @@ import { LOCAL_STORAGE_KEYS } from "../enums";
 import { useNavigate } from "@tanstack/react-router";
 import { getUserFromAuthResult } from "../helpers";
 import { FirebaseError } from "firebase/app";
+import { saveAUser } from "../../firebase/queries/users.queries";
+import { useAppContext } from "../../contexts/AppContext";
 
 export function useAuthenticate(label: "signup" | "login") {
 
@@ -25,10 +27,12 @@ export function useAuthenticate(label: "signup" | "login") {
 
     return {
         authenticate: async (event: FormEvent<HTMLFormElement>) => {
+
+            event.preventDefault()
+
             try {
 
                 setLoading(true)
-                event.preventDefault()
 
                 const formData = new FormData(event.currentTarget);
                 const data = Object.fromEntries(formData);
@@ -42,7 +46,7 @@ export function useAuthenticate(label: "signup" | "login") {
                     return
                 }
 
-                let user: AuthenticatedUserType | undefined = undefined
+                let user: Omit<AuthenticatedUserType, "newsletter" | "id"> | undefined = undefined
 
                 switch (label) {
                     case "signup": {
@@ -78,7 +82,11 @@ export function useAuthenticate(label: "signup" | "login") {
                     throw new Error("THROW_ANYWAYS")
                 }
 
-                saveToLocalStorage(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER, user)
+                // Create an account in acustom firestore collection, for use cases like comments
+                const authUser = await saveAUser(user)
+
+                // Save to local storage for later referencing
+                saveToLocalStorage(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER, authUser)
                 navigatetTo({ to: '/' })
 
             } catch (e) {
@@ -104,15 +112,23 @@ export function useAuthenticate(label: "signup" | "login") {
 
 export function useOAuth() {
 
+    const appCtx = useAppContext()
     const navigate = useNavigate()
 
     return {
         authenticate: async (provider: AuthProvider) => {
             try {
+
                 const account = await signInWithPopup(auth, provider)
                 const user = getUserFromAuthResult(account.user)
-                saveToLocalStorage(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER, user)
+
+                // Create an account in acustom firestore collection, for use cases like comments
+                const authUser = await saveAUser(user)
+                appCtx?.setAuthUser(authUser)
+
+                saveToLocalStorage(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER, authUser)
                 navigate({ to: "/" })
+
             } catch (e) {
                 const error = e as FirebaseError
 
@@ -140,6 +156,7 @@ export function useOAuth() {
 
 export function useLogOut() {
 
+    const appCtx = useAppContext()
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
 
@@ -149,6 +166,7 @@ export function useLogOut() {
             signOut(auth)
                 .then(() => {
                     removeFromLocalStorage(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER)
+                    appCtx?.setAuthUser(null)
                     toast.success("Vous êtes déconnecté !")
                     navigate({ to: "/" })
                 })

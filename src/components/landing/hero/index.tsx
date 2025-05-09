@@ -15,7 +15,7 @@ const LandingHero = () => {
   const { subscribeToNewsletter, loading } = useSubscribeToNewsletter()
   const sectionRef = useRef<HTMLElement | null>(null);
   const buttonContainerRef = useRef<HTMLButtonElement | null>(null)
-  const isSubscribed = !!appCtx?.subscriptionData?.contact
+  const isSubscribed = appCtx?.authUser?.newsletter
 
   useGSAP(() => {
     gsap.from(`.${style.content}`, {
@@ -47,7 +47,7 @@ const LandingHero = () => {
           Salut ! Je suis <span className={style.user__name}>Victor Nzanzu</span>,
           développeur web et romancier basé en République démocratique du Congo.
           J'aime partager ce que je connais, ce que j'aime et ce que je pense.
-          {appCtx?.subscriptionData ? " Merci de vous être abonné(e) à ma newsletter !" : " Intéressé(e) ? Abonnez-vous à ma newsletter."}
+          {isSubscribed ? " Merci de vous être abonné(e) à ma newsletter !" : " Intéressé(e) ? Abonnez-vous à ma newsletter."}
         </h1>
         <form className={style.newsletter__form} onSubmit={subscribeToNewsletter}>
           <div className={style.input__container}>
@@ -59,7 +59,7 @@ const LandingHero = () => {
               placeholder='tupac@gmail.com ou 0998855666'
               className={style.input}
               disabled={loading || isSubscribed}
-              value={appCtx?.subscriptionData?.contact}
+              defaultValue={appCtx?.authUser?.phoneNumber || appCtx?.authUser?.email!}
             />
           </div>
           <span ref={buttonContainerRef}>

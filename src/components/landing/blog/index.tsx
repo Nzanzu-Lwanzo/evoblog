@@ -14,8 +14,9 @@ const LandinBlog = () => {
         <div className={style.list__cards}>
           {isFetching ? (
             <>
-              {fakeList.map(() => {
-                return <CardLoadingSkeleton />
+              {fakeList.map((idx, elt) => {
+                console.log(idx)
+                return <CardLoadingSkeleton key={elt} />
               })}
             </>
           ) : (

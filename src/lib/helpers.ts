@@ -29,10 +29,11 @@ export function fromEmailGetName(email: string) {
 
 export function getUserFromAuthResult(user: User) {
     return {
-        id: user.uid,
+        authId: user.uid,
         name: user.displayName,
         email: user.email,
-        picture: user.photoURL
+        picture: user.photoURL,
+        phoneNumber: user.phoneNumber
     }
 }
 

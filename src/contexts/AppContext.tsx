@@ -1,13 +1,13 @@
 import React, { createContext, useContext, useState } from "react";
-import { SubscriberType } from "../firebase/@types";
 import { getFromLocalStorage } from "../lib/storage";
 import { LOCAL_STORAGE_KEYS } from "../lib/enums";
+import { AuthenticatedUserType } from "../lib/@type";
 
 interface AppContextType {
     showFilterAndSearchPanel: boolean;
     setShowFilterAndSearchPanel: React.Dispatch<React.SetStateAction<boolean>>;
-    subscriptionData: SubscriberType | null
-    setSubscriptionData: React.Dispatch<React.SetStateAction<SubscriberType | null>>
+    authUser: AuthenticatedUserType | null
+    setAuthUser: React.Dispatch<React.SetStateAction<AuthenticatedUserType | null>>
 }
 
 const AppContext = createContext<AppContextType | null>(null);
@@ -19,15 +19,15 @@ export const useAppContext = () => {
 export const AppContextProvider = ({ children }: { children: React.ReactNode }) => {
 
     const [showFilterAndSearchPanel, setShowFilterAndSearchPanel] = useState(false)
-    const [subscriptionData, setSubscriptionData] = useState<SubscriberType | null>(
-        getFromLocalStorage(LOCAL_STORAGE_KEYS.SUBSCRIPTION_DATA)
+    const [authUser, setAuthUser] = useState<AuthenticatedUserType | null>(
+        getFromLocalStorage(LOCAL_STORAGE_KEYS.AUTHENTICATED_USER)
     )
 
     const value = {
         showFilterAndSearchPanel,
         setShowFilterAndSearchPanel,
-        subscriptionData,
-        setSubscriptionData
+        authUser,
+        setAuthUser
     }
 
     return <AppContext.Provider value={value}>

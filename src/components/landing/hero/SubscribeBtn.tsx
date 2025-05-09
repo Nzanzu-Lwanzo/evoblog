@@ -13,7 +13,7 @@ const SubscribeBtn = () => {
         <button
             type="submit"
             className={style.button}
-            disabled={loading || !!appCtx?.subscriptionData}>
+            disabled={loading || !!appCtx?.authUser?.newsletter}>
             <span>
                 S'abonner
             </span>

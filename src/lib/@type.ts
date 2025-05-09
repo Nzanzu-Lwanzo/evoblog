@@ -79,9 +79,12 @@ export type LoginType = Omit<CreateAccountType, 'confirmPassword' | 'name'>
 
 export interface AuthenticatedUserType {
     id: string
+    authId: string;
     name: string | null
     email: string | null
     picture: string | null
+    phoneNumber: string | null;
+    newsletter: boolean
 }
 
 export interface CommentType {

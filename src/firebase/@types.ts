@@ -5,4 +5,4 @@ export interface SubscriberType {
     subscribedAt: string
 }
 
-export type CreateSubscriptionType = Omit<SubscriberType, 'id'>
+export type CreateSubscriptionType = Omit<SubscriberType, 'id' | 'subscribedAt'>

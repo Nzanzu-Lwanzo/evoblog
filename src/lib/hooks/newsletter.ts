@@ -1,13 +1,16 @@
 import { FormEvent, useState } from "react";
 import subsciptionSchema from "../validation/subscription.schema";
 import { saveASubscriber } from "../../firebase/queries/subscribers.queries";
-import { CreateSubscriptionType } from "../../firebase/@types";
+import { CreateSubscriptionType, SubscriberType } from "../../firebase/@types";
 import { toast } from "react-fox-toast";
-import { saveToLocalStorage } from "../storage";
+import { getFromLocalStorage, removeFromLocalStorage, saveToLocalStorage } from "../storage";
 import { LOCAL_STORAGE_KEYS } from "../enums";
 import { isValidEmail } from "../helpers";
 import { FirebaseError } from "firebase/app";
 import { useNavigate } from "@tanstack/react-router";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase/config";
+import { useAppContext } from "../../contexts/AppContext";
 
 const getData = (form: HTMLFormElement) => {
     const formData = new FormData(form);
@@ -23,6 +26,7 @@ const getData = (form: HTMLFormElement) => {
 
 export function useSubscribeToNewsletter() {
 
+    const appCtx = useAppContext()
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
@@ -30,11 +34,10 @@ export function useSubscribeToNewsletter() {
         loading,
         subscribeToNewsletter: async (event: FormEvent<HTMLFormElement>) => {
 
+            event.preventDefault()
+            setLoading(true)
+
             try {
-
-                setLoading(true)
-
-                event.preventDefault()
 
                 const data = getData(event.currentTarget)
                 const validationResult = subsciptionSchema.safeParse(data)
@@ -57,11 +60,12 @@ export function useSubscribeToNewsletter() {
                     return
                 }
 
-                // store in the local storage
+                // store in the local storage & state
                 saveToLocalStorage(LOCAL_STORAGE_KEYS.SUBSCRIPTION_DATA, saved)
+                appCtx?.setSubscriptionData(saved)
 
                 // Success toast message
-                toast.success("Merci de vous être abonnés !")
+                toast.success("Vous avez été abonné à la newsletter avec succès !")
 
             } catch (e) {
 
@@ -82,4 +86,42 @@ export function useSubscribeToNewsletter() {
         }
     }
 
+}
+
+export function useUnsubscribeFromNewsletter() {
+
+    const appCtx = useAppContext()
+    const subscribedUser = getFromLocalStorage<SubscriberType>(LOCAL_STORAGE_KEYS.SUBSCRIPTION_DATA)
+    const [loading, setLoading] = useState(false)
+
+    return {
+        unsubscribe: async () => {
+
+            setLoading(true)
+
+            try {
+                if (!subscribedUser) {
+                    toast.info("Aucune souscription trouvée !")
+                    return
+                }
+
+                const docRef = doc(db, "subscribers", subscribedUser.id)
+
+                deleteDoc(docRef).then(() => {
+                    appCtx?.setSubscriptionData(null)
+                    removeFromLocalStorage(LOCAL_STORAGE_KEYS.SUBSCRIPTION_DATA)
+                })
+
+                toast.success("Vous vous êtes désabonné avec succès !")
+
+                return
+
+            } catch {
+                toast.error("Une erreur est survenue, réessayez !")
+            } finally {
+                setLoading(false)
+            }
+        },
+        loading
+    }
 }

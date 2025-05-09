@@ -1,4 +1,4 @@
-import { AuthenticatedUserType } from "../../lib/@types";
+import { AuthenticatedUserType } from "../../lib/@type";
 import { LOCAL_STORAGE_KEYS } from "../../lib/enums";
 import { getFromLocalStorage } from "../../lib/storage";
 import { CreateSubscriptionType, SubscriberType } from "../@types";

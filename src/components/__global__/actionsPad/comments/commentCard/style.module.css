@@ -24,9 +24,10 @@
     justify-content: center;
     background-color: #f1f1f1;
     border-radius: 50%;
+    overflow: hidden;
 }
 
-.comment__container .user .user__pic:after {
+/* .comment__container .user .user__pic:after {
     content: '';
     width: 9px;
     height: 9px;
@@ -36,7 +37,7 @@
     border-radius: 50%;
     background-color: #0fc45a;
     border: 2px solid #ffffff;
-}
+} */
 
 .comment__container .user .user__info {
     width: 100%;
@@ -64,4 +65,5 @@
     line-height: 16px;
     font-weight: 600;
     color: var(--smooth-text);
+    line-height: 20px;
 }

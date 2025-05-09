@@ -18,6 +18,7 @@ export interface Post {
     tags: Tag[]
     shortUrl?: string;
     author: Author
+    comments: CommentType[]
     _updatedAt: string
     _createdAt: string
 }
@@ -63,6 +64,36 @@ export interface Sample {
 
 export interface ForListSamples {
     _id: string;
-    description:string
+    description: string
     artists: string[]
+}
+
+export interface CreateAccountType {
+    name: string
+    email: string
+    password: string
+    confirmPassword: string
+}
+
+export type LoginType = Omit<CreateAccountType, 'confirmPassword' | 'name'>
+
+export interface AuthenticatedUserType {
+    id: string
+    name: string | null
+    email: string | null
+    picture: string | null
+}
+
+export interface CommentType {
+    id: string
+    content: string;
+    user: AuthenticatedUserType
+    postId: string
+    createdAt: string
+}
+
+export interface CreateCommentType {
+    content: string;
+    user: string
+    postId: string
 }

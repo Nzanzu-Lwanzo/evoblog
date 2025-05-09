@@ -2,7 +2,7 @@ import { createLazyFileRoute } from '@tanstack/react-router'
 import LogInForm from '../../components/auth/login'
 import { getFromLocalStorage } from '../../lib/storage'
 import { LOCAL_STORAGE_KEYS } from '../../lib/enums'
-import { AuthenticatedUserType } from '../../lib/@types'
+import { AuthenticatedUserType } from '../../lib/@type'
 import LogOut from '../../components/auth/logout'
 
 export const Route = createLazyFileRoute('/auth/login')({

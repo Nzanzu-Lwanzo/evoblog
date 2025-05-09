@@ -5,11 +5,25 @@ import { getPost } from '../../../../backend/queries/post'
 import FullPageLoader from '../../../../components/__global__/fullPageLoader'
 import { ReadPostContextProvider } from '../../../../contexts/ReadArticleContext'
 import { useMatch } from '@tanstack/react-router'
+import { getPostComments } from '../../../../firebase/queries/comments.queries'
 
 export const Route = createFileRoute('/blog/read/$slug/')({
     component: RouteComponent,
-    loader(ctx) {
-        return getPost(ctx.params.slug)
+    async loader(ctx) {
+
+        const postWithoutComments = await getPost(ctx.params.slug)
+        if (!postWithoutComments) {
+            notFound()
+            return
+        }
+
+        const commentsPromise = await getPostComments(postWithoutComments?._id)
+        const comments = await Promise.all(commentsPromise)
+
+        return {
+            ...postWithoutComments,
+            comments
+        }
     },
 })
 

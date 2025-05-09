@@ -10,7 +10,7 @@ import {
     type AuthProvider
 } from "firebase/auth";
 import { auth } from "../../firebase/config";
-import { AuthenticatedUserType, CreateAccountType, LoginType } from "../@types";
+import { AuthenticatedUserType, CreateAccountType, LoginType } from "../@type";
 import { removeFromLocalStorage, saveToLocalStorage } from "../storage";
 import { LOCAL_STORAGE_KEYS } from "../enums";
 import { useNavigate } from "@tanstack/react-router";

@@ -7,6 +7,13 @@
     gap: 2rem;
 }
 
+.no__comments__yet {
+    color: var(--text-color);
+    font-weight: bold;
+    text-align: center;
+    color: lightcoral;
+}
+
 /* MEDIA QUERIES */
 @media only all and (max-width:1800px) {
     .list__comments {

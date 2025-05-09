@@ -1,11 +1,17 @@
+import { usePostComment } from '../../../../../lib/hooks/comments'
 import style from './style.module.css'
+import { useReadPostContext } from '../../../../../contexts/ReadArticleContext'
+import Loader from '../../../Loader'
 
 const CommentForm = () => {
+
+    const ctx = useReadPostContext()
+    const { postComment, saving, addingCommentToPost } = usePostComment(ctx?.post._id)
+
     return (
         <div className={style.text__box}>
-            <div className={style.box__container}>
-                <textarea placeholder="Reply" defaultValue={""} className={style.textarea} />
-                {/* <div contentEditable className={style.textarea}></div> */}
+            <form className={style.box__container} onSubmit={postComment}>
+                <textarea placeholder="Reply" name='content' className={style.textarea} />
                 <div>
                     <div className={style.formatting}>
                         <button type="button" className={style.button}>
@@ -158,34 +164,36 @@ const CommentForm = () => {
                             </svg>
                         </button>
                         <button type="submit" className={style.send} title="Send">
-                            <svg
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                height={18}
-                                width={18}
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    className={style.path}
-                                    strokeLinejoin="round"
-                                    strokeLinecap="round"
-                                    strokeWidth="2.5"
-                                    stroke="#ffffff"
-                                    d="M12 5L12 20"
-                                />
-                                <path
-                                    className={style.path}
-                                    strokeLinejoin="round"
-                                    strokeLinecap="round"
-                                    strokeWidth="2.5"
-                                    stroke="#ffffff"
-                                    d="M7 9L11.2929 4.70711C11.6262 4.37377 11.7929 4.20711 12 4.20711C12.2071 4.20711 12.3738 4.37377 12.7071 4.70711L17 9"
-                                />
-                            </svg>
+                            {saving || addingCommentToPost ? <Loader height={17} width={17} /> : (
+                                <svg
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    height={18}
+                                    width={18}
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path
+                                        className={style.path}
+                                        strokeLinejoin="round"
+                                        strokeLinecap="round"
+                                        strokeWidth="2.5"
+                                        stroke="#ffffff"
+                                        d="M12 5L12 20"
+                                    />
+                                    <path
+                                        className={style.path}
+                                        strokeLinejoin="round"
+                                        strokeLinecap="round"
+                                        strokeWidth="2.5"
+                                        stroke="#ffffff"
+                                        d="M7 9L11.2929 4.70711C11.6262 4.37377 11.7929 4.20711 12 4.20711C12.2071 4.20711 12.3738 4.37377 12.7071 4.70711L17 9"
+                                    />
+                                </svg>
+                            )}
                         </button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     )
 }

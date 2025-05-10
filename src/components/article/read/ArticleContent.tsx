@@ -10,11 +10,6 @@ const ArticleContent = () => {
 
     return (
         <article className={style.article}>
-            <h2 id='intro'>Introduction</h2>
-            <p>
-                {ctx?.post.description}
-            </p>
-
             {ctx?.post.image && <img src={buildImage(ctx.post.image)} />}
 
             <PortableText value={ctx?.post.content || []} />

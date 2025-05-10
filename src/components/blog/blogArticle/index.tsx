@@ -3,9 +3,9 @@ import { Link } from '@tanstack/react-router'
 import { MoveRight } from 'lucide-react'
 import Avatar from '../../__global__/avatar'
 import { Post } from '../../../lib/@type'
-import { formatDateTime } from '../../../lib/helpers'
 import { buildImage } from '../../../backend/client'
 import { Route as ReadBlogRoute } from '../../../routes/blog/read/$slug'
+import { formatAwesomeDate } from '../../../lib/formatters'
 
 
 const BlogArticle = ({ post }: { post: Post }) => {
@@ -13,7 +13,7 @@ const BlogArticle = ({ post }: { post: Post }) => {
         <div className={style.blog__card}>
             <div className={style.meta__infos}>
                 <Avatar img={{ src: buildImage(post.author.image) || '/img/user.jpg' }} />
-                <p className={style.date}>par <span className={style.author__name}>{post.author.name}</span> le {formatDateTime(post._updatedAt)}</p>
+                <p className={style.date}>par <span className={style.author__name}>{post.author.name}</span> le {formatAwesomeDate(post._updatedAt)}</p>
             </div>
             <h4 className={style.title}>{post.title}</h4>
             <p className={style.introduction}>

@@ -24,6 +24,7 @@
 
 .date {
     color: var(--smooth-text);
+    line-height: 1.3rem;
 }
 
 .title {

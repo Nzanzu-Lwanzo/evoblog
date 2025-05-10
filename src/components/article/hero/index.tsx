@@ -1,8 +1,8 @@
 import style from './style.module.css'
 import Avatar from '../../__global__/avatar'
-import { formatDateTime } from '../../../lib/helpers'
 import { buildImage } from '../../../backend/client'
 import { useReadPostContext } from '../../../contexts/ReadArticleContext'
+import { formatAwesomeDate } from '../../../lib/formatters'
 
 const ArticleHero = () => {
 
@@ -15,7 +15,7 @@ const ArticleHero = () => {
         <div className={style.meta__infos}>
           <Avatar img={{ src: buildImage(ctx?.post.author.image) || '/img/user.jpg' }} dims={45} />
           <div>
-            <p style={{ marginBottom: '2px' }}>Posté le {formatDateTime(ctx?.post._updatedAt!)}</p>
+            <p style={{ marginBottom: '2px' }}>Posté le {formatAwesomeDate(ctx?.post._updatedAt!)}</p>
             <p>
               <span>par</span>{" "}
               <span className={style.author__name}>{ctx?.post.author.name}</span>

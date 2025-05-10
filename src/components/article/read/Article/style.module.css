@@ -29,3 +29,7 @@
     align-items: center;
     gap: .5rem;
 }
+
+.author__and__date {
+    line-height: 1.2rem;
+}

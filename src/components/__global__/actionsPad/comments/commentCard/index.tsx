@@ -1,4 +1,5 @@
 import { CommentType } from '../../../../../lib/@type'
+import { formatAwesomeDate } from '../../../../../lib/formatters'
 import style from './style.module.css'
 
 const CommentCard = ({ comment }: { comment: CommentType }) => {
@@ -38,7 +39,7 @@ const CommentCard = ({ comment }: { comment: CommentType }) => {
                 </div>
                 <div className={style.user__info}>
                     <span className={style.span}>{comment.user.name}</span>
-                    <p className={style.p}>Wednesday, March 13th at 2:45pm</p>
+                    <p className={style.p}>{formatAwesomeDate(comment.createdAt)}</p>
                 </div>
             </div>
             <div className={style.comment__content}>

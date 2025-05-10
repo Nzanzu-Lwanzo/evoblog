@@ -123,6 +123,15 @@ article {
     }
 }
 
+.comment__content,
+.comment__content * {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+    color: var(--smooth-text);
+    line-height: 20px;
+}
+
 ::-webkit-search-cancel-button {
     display: none;
 }

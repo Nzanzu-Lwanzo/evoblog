@@ -42,8 +42,7 @@ const CommentCard = ({ comment }: { comment: CommentType }) => {
                     <p className={style.p}>{formatAwesomeDate(comment.createdAt)}</p>
                 </div>
             </div>
-            <div className={style.comment__content}>
-                {comment.content}
+            <div className="comment__content" dangerouslySetInnerHTML={{ __html: comment.content }}>
             </div>
         </div>
     )

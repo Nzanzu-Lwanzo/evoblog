@@ -1,6 +1,6 @@
 import { type User } from "firebase/auth";
-
 import { Author } from "./@type";
+import { marked } from "marked"
 
 export function getYouTubeVideoThumbnail(videoId: string, quality = 'hqdefault') {
     return `https://img.youtube.com/vi/${videoId}/${quality}.jpg`;
@@ -60,5 +60,14 @@ export function displayAuthorsNames(authors: Author[]) {
         `${authors.at(0)?.name} & ${authors.length - 1} autre${(authorsLength - 1) > 1 ? 's' : ''}`
 }
 
+export async function fromMarkdowmToMarkup(str: string) {
+    const md = await marked.parse(str, {
+        gfm: true,
+        breaks: true,
+        async: true
+    })
+
+    return md
+}
 
 export const fakeList = [0, 1, 2, 3, 4, 5, 6]

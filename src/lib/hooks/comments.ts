@@ -5,6 +5,7 @@ import { AuthenticatedUserType } from "../@type"
 import { saveAComment } from "../../firebase/queries/comments.queries";
 import { toast } from "react-fox-toast";
 import { useReadPostContext } from "../../contexts/ReadArticleContext";
+import { fromMarkdowmToMarkup } from "../helpers";
 
 
 export function usePostComment(postId: string | undefined, callback: () => void) {
@@ -31,7 +32,7 @@ export function usePostComment(postId: string | undefined, callback: () => void)
                 }
 
                 const comment = {
-                    content: data.content,
+                    content: await fromMarkdowmToMarkup(data.content),
                     user: authUser.id,
                     postId
                 }

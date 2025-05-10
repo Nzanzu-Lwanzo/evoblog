@@ -1,6 +1,16 @@
 import { useEffect, useState } from "react";
 import styles from "./style.module.css";
 
+/*
+const sections = [
+    { id: "intro", label: "Introduction" },
+    { id: "enjeux", label: "Les enjeux de la sécurité en RTC" },
+    { id: "responsabilites", label: "Django : quelles responsabilités côté backend ?" },
+    { id: "techniques", label: "Techniques de sécurisation" },
+    { id: "conclusion", label: "Conclusion" }
+];
+*/
+
 const ScrollSpy = ({ sections }: { sections: { id: string, label: string }[] }) => {
     const [activeId, setActiveId] = useState<string | null>(null);
 
